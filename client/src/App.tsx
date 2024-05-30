@@ -16,7 +16,7 @@ function App(): JSX.Element {
       element: <BasicLayout />,
       children: [
         {
-          element: <PrivateRouter isAllowed={user.status !== 'logged'} redirect="/analysys" />,
+          element: <PrivateRouter isAllowed={user.status !== 'logged'} redirect="/analysis" />,
           children: [
             { path: '/signin', element: <BannerPage /> },
             { path: '/signup', element: <SignUpPage /> },
