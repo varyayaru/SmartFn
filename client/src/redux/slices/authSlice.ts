@@ -32,18 +32,18 @@ const authSlice = createSlice({
       state.userData.status = 'logged';
       state.userData = { ...user, ...state.userData };
     });
-    builder.addCase(refreshThunk.rejected, (state,action)=>{
-      state.userData.status = 'guest'
-    }) //??????
+    builder.addCase(refreshThunk.rejected, (state, action) => {
+      state.userData.status = 'guest';
+    });
     builder.addCase(signUpThunk.fulfilled, (state, action) => {
       const { accessToken, user } = action.payload;
       state.accessToken = accessToken;
       state.userData.status = 'logged';
-      state.userData = { ...user, ...state.userData }; //!
+      state.userData = { ...user, ...state.userData };
     });
     builder.addCase(logoutThunk.fulfilled, (state, action) => {
       state.accessToken = '';
-      state.userData = { status: 'guest' }; //!
+      state.userData = { status: 'guest' };
     });
   },
 });
