@@ -4,9 +4,6 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const tokensRouter = require('./routes/tokensRouter');
 const userRouter = require('./routes/userRouter');
-const studentRouter = require('./routes/studentsRouter');
-const groupRouter = require('./routes/groupRouter');
-const verifyAccessToken = require('./middlewares/verifyAccessToken');
 
 require('dotenv').config();
 
