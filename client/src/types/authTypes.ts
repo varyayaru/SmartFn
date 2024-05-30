@@ -6,6 +6,7 @@ export type UserType = {
 };
 
 export type UserState =
+
   | { status: 'guest' }
   | { status: 'fetching' }
   | ({
