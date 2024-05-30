@@ -34,8 +34,7 @@ export default function BasicLayout(): JSX.Element {
         <SpinnerPage />
       ) : (
         <>
-          {/* {user.status !== 'guest' && <NavBar />} */}
-          <NavBar/>
+          {user.status !== 'guest' && <NavBar />}
           <Outlet />
         </>
       )}

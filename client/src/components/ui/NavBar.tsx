@@ -9,6 +9,8 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Link,
+  Image,
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
@@ -16,56 +18,42 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { logoutThunk } from '../../redux/slices/authThunkActions';
 
 export default function NavBar(): JSX.Element {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useAppSelector((state) => state.auth.userData);
   const dispatch = useAppDispatch();
   const logoutHandler = (): void => {
     void dispatch(logoutThunk());
   };
   return (
-    <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} boxShadow="dark-lg">
+    <Box px={4} marginTop='10px' boxShadow='xs' bg='white'>
       <Flex h={16} alignItems="center" justifyContent="space-between">
-        <IconButton
-          size="md"
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          aria-label="Open Menu"
-          display={{ md: 'none' }}
-          onClick={isOpen ? onClose : onOpen}
-        />
         <HStack spacing={8} alignItems="center">
-          <Box>Logo</Box>
+          <Box>
+            <Link href="/analysis">
+              <Image
+                width="130px"
+                src="https://static.vecteezy.com/system/resources/previews/011/794/041/non_2x/one-hundred-dollar-bill-free-png.png"
+                alt="Logo"
+              />
+            </Link>
+          </Box>
           <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
-            <NavLink to="/">Home</NavLink>
+            <Button>+</Button> 
+            <Button>-</Button>
+            <NavLink to="/analysys">Аналитика</NavLink>
+            <NavLink to="/expinc">Доходы и расходы</NavLink>
+            <NavLink to="/">Цели</NavLink>
+            
           </HStack>
         </HStack>
         <Flex alignItems="center">
           <HStack spacing={8} alignItems="center">
-            {user.status === 'logged' ? (
-              <>
-                {' '}
-                <Box>{user.username}</Box>
-                <Button onClick={logoutHandler} colorScheme="red" variant="outline">
-                  logout
-                </Button>
-              </> //!
-            ) : (
-              <>
-                {' '}
-                <NavLink to="/signin">signin</NavLink>
-                <NavLink to="/signup">signup</NavLink>
-              </>
-            )}
+            <Box>{user.username}</Box>
+            <Button onClick={logoutHandler} colorScheme="red" variant="outline">
+              logout
+            </Button>
           </HStack>
         </Flex>
       </Flex>
-
-      {isOpen ? (
-        <Box pb={4} display={{ md: 'none' }}>
-          <Stack as="nav" spacing={4}>
-            <NavLink to="/">Home</NavLink>
-          </Stack>
-        </Box>
-      ) : null}
     </Box>
   );
 }

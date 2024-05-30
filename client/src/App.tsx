@@ -16,16 +16,18 @@ function App(): JSX.Element {
       element: <BasicLayout />,
       children: [
         {
-          element: <PrivateRouter isAllowed={user.status !== 'logged'} redirect="/" />,
+          element: <PrivateRouter isAllowed={user.status !== 'logged'} redirect="/analysys" />,
           children: [
             { path: '/signin', element: <BannerPage /> },
             { path: '/signup', element: <SignUpPage /> },
-            { path: '/expinc', element: <ExpIncPage /> },
           ],
         },
         {
           element: <PrivateRouter isAllowed={user.status === 'logged'} redirect="/signin" />,
-          children: [{ path: '/', element: <AnalysisPage /> }],
+          children: [
+            { path: '/analysis', element: <AnalysisPage /> },
+            { path: '/expinc', element: <ExpIncPage /> },
+          ],
         },
       ],
     },
