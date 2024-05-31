@@ -2,9 +2,19 @@ import React, { useState } from 'react';
 import { Box, Button, Card, CardBody, Divider, Flex, Heading, Stack, Text } from '@chakra-ui/react';
 
 const months = [
-    'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-    'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
-  ];
+  'Январь',
+  'Февраль',
+  'Март',
+  'Апрель',
+  'Май',
+  'Июнь',
+  'Июль',
+  'Август',
+  'Сентябрь',
+  'Октябрь',
+  'Ноябрь',
+  'Декабрь',
+];
 
 type ExpIncCardTypes = {
   title: string;
@@ -21,8 +31,7 @@ export default function ExpIncCard({ title, children }: ExpIncCardTypes): JSX.El
     setCurrentMonth((prev) => (prev === 11 ? 0 : prev + 1));
   };
   return (
-   
-    <Card minH="800px" alignContent='center' textAlign='center'>
+    <Card minH="800px" alignContent="center" textAlign="center" marginTop="100px">
       <CardBody>
         <Stack mt="6" spacing="3">
           <Heading size="md">{title}</Heading>
