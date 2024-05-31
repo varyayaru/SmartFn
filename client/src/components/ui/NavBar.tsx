@@ -32,6 +32,7 @@ export default function NavBar(): JSX.Element {
     <>
       <Box px={4} marginTop="10px" boxShadow="xs" bg="white">
         <Flex h={16} alignItems="center" justifyContent="space-between">
+
           <HStack spacing={8} alignItems="center">
             <Box>
               <Link href="/analysis">

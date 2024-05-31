@@ -7,7 +7,7 @@ import SignUpPage from './components/pages/SignUpPage';
 import BannerPage from './components/pages/BannerPage';
 import AnalysisPage from './components/pages/AnalysisPage';
 import ExpIncPage from './components/pages/ExpIncPage';
-import CategoriesPage from './components/pages/CategoriesPage';
+import GoalsPage from './components/pages/GoalsPage';
 
 function App(): JSX.Element {
   const user = useAppSelector((state) => state.auth.userData);
