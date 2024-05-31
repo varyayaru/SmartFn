@@ -28,7 +28,7 @@ function App(): JSX.Element {
           children: [
             { path: '/analysis', element: <AnalysisPage /> },
             { path: '/expinc', element: <ExpIncPage /> },
-            { path: '/goals', element: <GoalsPage /> },
+            { path: '/categories', element: <CategoriesPage /> },
           ],
         },
       ],
