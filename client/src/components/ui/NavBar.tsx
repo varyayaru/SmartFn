@@ -48,7 +48,7 @@ export default function NavBar(): JSX.Element {
         <Flex alignItems="center">
           <HStack spacing={8} alignItems="center">
             <Box>{user.username}</Box>
-            <Button onClick={logoutHandler} colorScheme="red" variant="outline">
+            <Button onClick={logoutHandler}  variant="outline">
               logout
             </Button>
           </HStack>
