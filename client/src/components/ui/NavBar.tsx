@@ -39,10 +39,10 @@ export default function NavBar(): JSX.Element {
           <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
             <Button>+</Button> 
             <Button>-</Button>
-            <NavLink to="/analysys">Аналитика</NavLink>
+            <NavLink to="/analysis">Аналитика</NavLink>
             <NavLink to="/expinc">Доходы и расходы</NavLink>
             <NavLink to="/">Цели</NavLink>
-            
+            <NavLink to="/categories">Мои категории</NavLink>
           </HStack>
         </HStack>
         <Flex alignItems="center">
