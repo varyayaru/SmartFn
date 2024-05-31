@@ -24,7 +24,7 @@ export default function NavBar(): JSX.Element {
     void dispatch(logoutThunk());
   };
   return (
-    <Box px={4} marginTop='10px' boxShadow='xs' bg='white'>
+    <Box px={4} marginTop="10px" boxShadow="xs" bg="white">
       <Flex h={16} alignItems="center" justifyContent="space-between">
         <HStack spacing={8} alignItems="center">
           <Box>
@@ -37,18 +37,18 @@ export default function NavBar(): JSX.Element {
             </Link>
           </Box>
           <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
-            <Button>+</Button> 
+            <Button>+</Button>
             <Button>-</Button>
-            <NavLink to="/analysys">Аналитика</NavLink>
+            <NavLink to="/analysis">Аналитика</NavLink>
             <NavLink to="/expinc">Доходы и расходы</NavLink>
             <NavLink to="/">Цели</NavLink>
-            
+            <NavLink to="/categories">Мои категории</NavLink>
           </HStack>
         </HStack>
         <Flex alignItems="center">
           <HStack spacing={8} alignItems="center">
             <Box>{user.username}</Box>
-            <Button onClick={logoutHandler} colorScheme="red" variant="outline">
+            <Button onClick={logoutHandler}  variant="outline">
               logout
             </Button>
           </HStack>
