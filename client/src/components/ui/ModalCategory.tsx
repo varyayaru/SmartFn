@@ -28,7 +28,7 @@ export default function ModalCategory({ title, isOpen, onClose }): JSX.Element {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent minHeight="300px" maxWidth="400px">
+      <ModalContent  maxWidth="400px">
         <ModalHeader> </ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
@@ -37,14 +37,18 @@ export default function ModalCategory({ title, isOpen, onClose }): JSX.Element {
             <Input placeholder="Wildberries" />
           </FormControl>
           <Box mt={4}>
-            <Picker onEmojiClick={onEmojiClick} previewConfig={{showPreview:false}} searchDisabled title="" />
+            <Picker
+              onEmojiClick={onEmojiClick}
+              previewConfig={{ showPreview: false }}
+              searchDisabled
+              title=""
+            />
           </Box>
-          {/* {chosenEmoji && <Box mt={4}>{chosenEmoji.emoji}</Box>} */}
         </ModalBody>
         <ModalFooter>
           <Box width="100%" display="flex" justifyContent="center">
             <IconButton
-              marginBottom="20px"
+              marginBottom="40px"
               type="submit"
               icon={<CheckIcon />}
               colorScheme="green"

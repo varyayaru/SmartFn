@@ -14,7 +14,7 @@ const PlusIcon = createIcon({
 export default function AddCatCard(): JSX.Element {
   const { onOpen, isOpen, onClose } = useDisclosure();
   return (
-    <Card alignItems="center" marginTop="50px" justifyContent="center">
+    <Card alignItems="center" marginTop="50px" justifyContent="center" minH='304px' border="none" shadow="none" bg="none">
       <Button
         onClick={onOpen}
         variant="unstyled"

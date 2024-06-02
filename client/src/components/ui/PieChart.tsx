@@ -5,9 +5,7 @@ import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-
-
-export default function PieChart({data, wid, hei}): JSX.Element {
+export default function PieChart({ data, wid, hei }): JSX.Element {
   return (
     <Box width={wid} height={hei}>
       <Doughnut data={data} />

@@ -1,23 +1,11 @@
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Grid,
-  GridItem,
-  Heading,
-  SimpleGrid,
-  Text,
-} from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react';
 import React from 'react';
 import CategoryCard from '../ui/CategoryCard';
 import AddCatCard from '../ui/AddCatCard';
-import ModalAddCategory from '../ui/ModalCategory';
 
 export default function CategoriesPage(): JSX.Element {
   return (
-    <SimpleGrid spacing={4} templateColumns="repeat(4, minmax(200px, 1fr))">
+    <SimpleGrid spacing={4} minChildWidth="200px" templateColumns="repeat(auto-fill, minmax(200px, 1fr))">
       <AddCatCard />
       <CategoryCard />
       <CategoryCard />
