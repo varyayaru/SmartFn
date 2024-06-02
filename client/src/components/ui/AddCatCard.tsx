@@ -1,7 +1,8 @@
 import { AddIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import { Button, Card, createIcon, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
-import ModalAddCategory from './ModalAddCategory';
+import ModalAddCategory from './ModalCategory';
+import ModalCategory from './ModalCategory';
 
 const PlusIcon = createIcon({
   displayName: 'PlusIcon',
@@ -29,7 +30,7 @@ export default function AddCatCard(): JSX.Element {
       >
         <PlusIcon boxSize="100%" />
       </Button>
-      <ModalAddCategory isOpen={isOpen} onClose={onClose} />
+      <ModalCategory title="Добавить категорию расходов" isOpen={isOpen} onClose={onClose} />
     </Card>
   );
 }
