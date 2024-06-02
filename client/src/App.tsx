@@ -8,6 +8,7 @@ import BannerPage from './components/pages/BannerPage';
 import AnalysisPage from './components/pages/AnalysisPage';
 import ExpIncPage from './components/pages/ExpIncPage';
 import GoalsPage from './components/pages/GoalsPage';
+import CategoriesPage from './components/pages/CategoriesPage';
 
 function App(): JSX.Element {
   const user = useAppSelector((state) => state.auth.userData);
@@ -29,6 +30,8 @@ function App(): JSX.Element {
             { path: '/analysis', element: <AnalysisPage /> },
             { path: '/expinc', element: <ExpIncPage /> },
             { path: '/categories', element: <CategoriesPage /> },
+            { path: '/categories', element: <CategoriesPage /> },
+            { path: '/goals', element: <GoalsPage /> },
           ],
         },
       ],

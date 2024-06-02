@@ -14,7 +14,7 @@ import {
   Box,
   IconButton,
 } from '@chakra-ui/react';
-import { CheckIcon } from '@chakra-ui/icons';
+import { AddIcon } from '@chakra-ui/icons';
 
 export default function ModalIncome({ isOpen, onClose }): JSX.Element {
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -23,9 +23,9 @@ export default function ModalIncome({ isOpen, onClose }): JSX.Element {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent mx={{ base: 2, sm: 4 }} width={{ base: '90%', md: '500px' }}>
         <ModalHeader>Ваш доход</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -35,10 +35,11 @@ export default function ModalIncome({ isOpen, onClose }): JSX.Element {
               <Input type="text" name="name" />
               <FormHelperText>Выберите категорию:</FormHelperText>
             </FormControl>
-            <Box display="flex" justifyContent="center" mt={2}>
+            <Box display="flex" justifyContent="center" mt={4}>
               <IconButton
+                mt="20px"
                 type="submit"
-                icon={<CheckIcon />}
+                icon={<AddIcon />}
                 colorScheme="green"
                 aria-label="Submit"
                 borderRadius="full"
