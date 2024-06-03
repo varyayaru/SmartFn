@@ -8,6 +8,7 @@ import BannerPage from './components/pages/BannerPage';
 import AnalysisPage from './components/pages/AnalysisPage';
 import ExpIncPage from './components/pages/ExpIncPage';
 import GoalsPage from './components/pages/GoalsPage';
+import CategoriesPage from './components/pages/CategoriesPage';
 
 function App(): JSX.Element {
   const user = useAppSelector((state) => state.auth.userData);
@@ -17,7 +18,7 @@ function App(): JSX.Element {
       element: <BasicLayout />,
       children: [
         {
-          element: <PrivateRouter isAllowed={user.status !== 'logged'} redirect="/analysis" />,
+          element: <PrivateRouter isAllowed={user.status !== 'logged'} redirect="/" />,
           children: [
             { path: '/signin', element: <BannerPage /> },
             { path: '/signup', element: <SignUpPage /> },
@@ -26,9 +27,11 @@ function App(): JSX.Element {
         {
           element: <PrivateRouter isAllowed={user.status === 'logged'} redirect="/signin" />,
           children: [
-            { path: '/analysis', element: <AnalysisPage /> },
+            { path: '/', element: <AnalysisPage /> },
             { path: '/expinc', element: <ExpIncPage /> },
             { path: '/categories', element: <CategoriesPage /> },
+            { path: '/goals', element: <GoalsPage /> },
+
           ],
         },
       ],
