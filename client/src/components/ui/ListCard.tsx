@@ -1,26 +1,8 @@
 import React from 'react';
-import '../../css/expinc.css';
-import { Flex, UnorderedList, ListItem, Stack, Text } from '@chakra-ui/react';
-import { FixedSizeList as List } from 'react-window';
-import { ArrowRightIcon } from '@chakra-ui/icons';
-import ExpIncCard from './ExpIncCard';
-import DonutChart from './DonutChart';
+import { Box, Flex, ListItem, Stack, Text } from '@chakra-ui/react';
+import { ArrowRightIcon, SmallCloseIcon } from '@chakra-ui/icons';
 
-const items = [
-  { name: 'Item 1', price: 1000 },
-  { name: 'Item 2', price: 2000 },
-  { name: 'Item 3', price: 3000 },
-  { name: 'Item 3', price: 3000 },
-  { name: 'Item 3', price: 3000 },
-  { name: 'Item 1', price: 1000 },
-  { name: 'Item 2', price: 2000 },
-  { name: 'Item 3', price: 3000 },
-  { name: 'Item 3', price: 3000 },
-  { name: 'Item 3', price: 3000 },
-];
-
-export default function ListCard({ index, style }) {
-  const item = items[index];
+export default function ListCard({ index, style, item }) {
   return (
     <ListItem
       style={style}
@@ -29,20 +11,27 @@ export default function ListCard({ index, style }) {
       minHeight={35}
       maxHeight={250}
       width={315}
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
     >
-      <Flex gap={3} alignItems="center" justifyContent="space-between">
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-          <ArrowRightIcon />
-          <Text fontSize="md" color="grey">
-            {item.name}
-          </Text>
-        </div>
-        <Stack direction="row">
-          <Text color="tomato" fontSize="xl">
-            {item.price}
-          </Text>
-        </Stack>
-      </Flex>
+      <div style={{ display: 'flex', gap: '10px', alignItems:'center' }}>
+        <SmallCloseIcon  />
+        <Text fontSize="md" color="grey">
+          {item.Category ? (
+            <Box gap="5">
+              {item.Category.emoji} {item.Category.name}
+            </Box>
+          ) : (
+            ''
+          )}
+        </Text>
+      </div>
+      <Stack direction="row">
+        <Text color={item.Category ? 'tomato' : 'green'} fontSize="xl">
+          {item.sum} ₽
+        </Text>
+      </Stack>
     </ListItem>
   );
 }

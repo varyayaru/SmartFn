@@ -12,20 +12,21 @@ export default function BasicLayout(): JSX.Element {
   const dispatch = useAppDispatch();
   const toast = useToast();
   const user = useAppSelector((state) => state.auth.userData);
+
   useEffect(() => {
-    void dispatch(refreshThunk())
-      // .unwrap()
-      // .catch((err: AxiosError) => {
-      //   console.log(err.code);
-      //   if (err.code === 'ERR_NETWORK') {
-      //     toast({
-      //       title: 'Server connection problem.',
-      //       status: 'error',
-      //       duration: 9000,
-      //       isClosable: true,
-      //     });
-      //   }
-      // });
+    void dispatch(refreshThunk());
+    // .unwrap()
+    // .catch((err: AxiosError) => {
+    //   console.log(err.code);
+    //   if (err.code === 'ERR_NETWORK') {
+    //     toast({
+    //       title: 'Server connection problem.',
+    //       status: 'error',
+    //       duration: 9000,
+    //       isClosable: true,
+    //     });
+    //   }
+    // });
   }, []);
 
   return (

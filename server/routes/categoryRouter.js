@@ -1,10 +1,34 @@
 const categoryRouter = require('express').Router();
-const { Category } = require('../db/models');
+const { startOfMonth, endOfMonth } = require('date-fns');
+const { Category, Transaction } = require('../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
+const { Op } = require('sequelize');
 
-categoryRouter.get('/', verifyAccessToken, async (req, res) => {
+categoryRouter.post('/trans', verifyAccessToken, async (req, res) => {
   try {
-    const data = await Category.findAll({ where: { userId: res.locals.user.id } });
+    const { year, month } = req.body;
+
+    if (!year || !month) {
+      return res.status(400).json({ error: 'Year and month are required' });
+    }
+
+    const startDate = startOfMonth(new Date(year, month - 1));
+    const endDate = endOfMonth(new Date(year, month - 1));
+
+    const data = await Category.findAll({
+      where: { userId: res.locals.user.id },
+      include: [
+        {
+          model: Transaction({
+            where: {
+              createdAt: {
+                [Op.between]: [startDate, endDate],
+              },
+            },
+          }),
+        },
+      ],
+    });
     res.json(data);
   } catch (error) {
     res.status(500).json({ message: 'Oshibka category router' });

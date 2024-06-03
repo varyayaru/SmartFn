@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react';
-import PieChart from '../ui/PieChart';
+import PieChart from '../ui/ExpPieChart';
 import BarChart from '../ui/BarChart';
 
 export const data = {
