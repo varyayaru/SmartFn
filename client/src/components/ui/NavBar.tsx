@@ -34,11 +34,11 @@ export default function NavBar(): JSX.Element {
 
   return (
     <>
-      <Box px={4} marginTop="10px" marginBottom='30px' boxShadow="xs" bg="white">
+      <Box px={4} marginTop="10px" marginBottom="30px" boxShadow="xs" bg="white">
         <Flex h={16} alignItems="center" justifyContent="space-between" gap="10px">
           <Box>
             <Link href="/">
-              <Image 
+              <Image
                 width="130px"
                 src="https://static.vecteezy.com/system/resources/previews/011/794/041/non_2x/one-hundred-dollar-bill-free-png.png"
                 alt="Logo"

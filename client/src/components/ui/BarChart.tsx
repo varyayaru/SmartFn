@@ -15,6 +15,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export const options = {
   responsive: true,
+
   plugins: {
     legend: {
       position: 'top' as const,
@@ -32,14 +33,14 @@ export const data = {
   labels,
   datasets: [
     {
-      label: 'Расходы',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })), // y |
-      backgroundColor: 'rgba(233, 66, 66, 0.55)',
-    },
-    {
       label: 'Доходы',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })), // y |
       backgroundColor: 'rgba(94, 230, 83, 0.55)',
+    },
+    {
+      label: 'Расходы',
+      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })), // y |
+      backgroundColor: 'rgba(233, 66, 66, 0.55)',
     },
   ],
 };

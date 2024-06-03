@@ -31,7 +31,6 @@ function App(): JSX.Element {
             { path: '/expinc', element: <ExpIncPage /> },
             { path: '/categories', element: <CategoriesPage /> },
             { path: '/goals', element: <GoalsPage /> },
-
           ],
         },
       ],
