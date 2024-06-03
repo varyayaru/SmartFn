@@ -23,9 +23,9 @@ export default function ModalIncome({ isOpen, onClose }): JSX.Element {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent mx={{ base: 2, sm: 4 }} width={{ base: '90%', md: '500px' }}>
+      <ModalContent mx="4" w={{ base: '90%', md: '500px' }}>
         <ModalHeader>Ваш доход</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -33,7 +33,6 @@ export default function ModalIncome({ isOpen, onClose }): JSX.Element {
             <FormControl>
               <FormLabel>Сумма:</FormLabel>
               <Input type="text" name="name" />
-              <FormHelperText>Выберите категорию:</FormHelperText>
             </FormControl>
             <Box display="flex" justifyContent="center" mt={4}>
               <IconButton
