@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { Box, Button, Flex, List, Text, UnorderedList, useColorModeValue } from '@chakra-ui/react';
 import PieChart from '../ui/PieChart';
 import BarChart from '../ui/BarChart';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { getExpendsMonthThunk, getIncomesMonthThunk } from '../../redux/slices/transThunkAction';
+import ListCard from '../ui/ListCard';
 
 export const data = {
   labels: ['Доходы', 'Расходы'],
@@ -33,6 +36,17 @@ const months = [
 
 export default function AnalysisPage(): JSX.Element {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const dispatch = useAppDispatch();
+  const month = useAppSelector((state) => state.trans.choosenMonth);
+  const year = useAppSelector((state) => state.trans.choosenYear);
+
+  useEffect(() => {
+    void dispatch(getIncomesMonthThunk({ month, year }));
+    void dispatch(getExpendsMonthThunk({ month, year }));
+  }, [dispatch, month, year]);
+
+  const incomes = useAppSelector((state) => state.trans.incomes);
+  const expends = useAppSelector((state) => state.trans.expends);
 
   const prevMonth = (): void => {
     setCurrentMonth((prev) => (prev === 0 ? 11 : prev - 1));

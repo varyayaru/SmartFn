@@ -1,8 +1,9 @@
 import { AddIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import { Button, Card, createIcon, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
-import ModalAddCategory from './ModalCategory';
 import ModalCategory from './ModalCategory';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { addCategoriesThunk } from '../../redux/slices/CatThunkAction';
 
 const PlusIcon = createIcon({
   displayName: 'PlusIcon',
@@ -13,8 +14,26 @@ const PlusIcon = createIcon({
 });
 export default function AddCatCard(): JSX.Element {
   const { onOpen, isOpen, onClose } = useDisclosure();
+  const dispatch = useAppDispatch();
+
+  const addCatHandler = async (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    const formData = Object.fromEntries(new FormData(e.currentTarget));
+    void dispatch(addCategoriesThunk(formData));
+    onClose();
+    e.currentTarget.reset();
+  };
+
   return (
-    <Card alignItems="center" marginTop="50px" justifyContent="center" minH='304px' border="none" shadow="none" bg="none">
+    <Card
+      alignItems="center"
+      marginTop="50px"
+      justifyContent="center"
+      minH="304px"
+      border="none"
+      shadow="none"
+      bg="none"
+    >
       <Button
         onClick={onOpen}
         variant="unstyled"
@@ -30,7 +49,12 @@ export default function AddCatCard(): JSX.Element {
       >
         <PlusIcon boxSize="100%" />
       </Button>
-      <ModalCategory title="Добавить категорию расходов" isOpen={isOpen} onClose={onClose} />
+      <ModalCategory
+        title="Добавить категорию расходов"
+        isOpen={isOpen}
+        onClose={onClose}
+        onSubmit={addCatHandler}
+      />
     </Card>
   );
 }

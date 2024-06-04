@@ -34,7 +34,7 @@ categoryRouter.put('/:id', verifyAccessToken, async (req, res) => {
   try {
     await Category.update(req.body, { where: { id } });
     const data = await Category.findByPk(id);
-    res.status(204).json(data);
+    res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: 'Oshibka category router' });
   }
