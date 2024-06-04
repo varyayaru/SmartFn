@@ -6,7 +6,6 @@ export type UserType = {
 };
 
 export type UserState =
-
   | { status: 'guest' }
   | { status: 'fetching' }
   | ({
@@ -16,6 +15,7 @@ export type UserState =
 export type InitialUserType = {
   accessToken: string;
   userData: UserState;
+  error: string;
 };
 
 export type AuthSignUpType = Omit<UserType, 'id'>;

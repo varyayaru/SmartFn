@@ -8,6 +8,7 @@ const initialState: InitialUserType = {
   userData: {
     status: 'fetching',
   },
+  error: '',
 };
 
 const authSlice = createSlice({
@@ -17,6 +18,9 @@ const authSlice = createSlice({
     setAccessToken(state, action: PayloadAction<string>) {
       state.accessToken = action.payload;
     },
+    setError(state, action: PayloadAction<string>) {
+      state.error = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(signInThunk.fulfilled, (state, action) => {
@@ -24,6 +28,10 @@ const authSlice = createSlice({
       state.accessToken = accessToken;
       state.userData.status = 'logged';
       state.userData = { ...user, ...state.userData };
+    });
+
+    builder.addCase(signInThunk.rejected, (state, action) => {
+      state.error = action.payload as string;
     });
 
     builder.addCase(refreshThunk.fulfilled, (state, action) => {
@@ -49,5 +57,7 @@ const authSlice = createSlice({
 });
 
 const authReducer = authSlice.reducer;
+
+export const { setError } = authSlice.actions;
 
 export default authReducer;

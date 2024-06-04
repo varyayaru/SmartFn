@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
       });
 
       if (!(await bcrypt.compare(password, user.password)) || !user) {
-        return res.status(401).json({ message: 'Incorrect password' });
+        return res.status(401).json({ message: 'Неправильный пароль' });
       }
 
       const plainUser = user.get();

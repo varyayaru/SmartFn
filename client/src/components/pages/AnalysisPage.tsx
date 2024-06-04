@@ -13,7 +13,6 @@ export default function AnalysisPage(): JSX.Element {
           py={4}
           boxShadow="dark-lg"
           borderRadius="md"
-          mb={4}
           flex="1"
           mr={{ base: 0, md: 6 }}
           mb={{ base: 6, md: 0 }}

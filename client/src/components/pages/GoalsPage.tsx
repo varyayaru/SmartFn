@@ -164,6 +164,7 @@ export default function GoalsPage(): JSX.Element {
                     />
                     <IconButton
                       aria-label="Удалить"
+                      
                       icon={<DeleteIcon />}
                       marginRight="10px"
                       onClick={() => deleteGoal(goal.name)}

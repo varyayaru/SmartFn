@@ -46,9 +46,11 @@ export default function NavBar(): JSX.Element {
             <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
               <Button onClick={incomeDisclosure.onOpen}>+</Button>
               <Button onClick={consumptionDisclosure.onOpen}>-</Button>
-              <NavLink to="/analysys">Аналитика</NavLink>
+              <NavLink to="/analysis">Аналитика</NavLink>
               <NavLink to="/expinc">Доходы и расходы</NavLink>
-              <NavLink to="/">Цели</NavLink>
+              <NavLink to="/goals">Цели</NavLink>
+              <NavLink to="/categories">Категории</NavLink>
+
             </HStack>
           </HStack>
           <Flex alignItems="center">
