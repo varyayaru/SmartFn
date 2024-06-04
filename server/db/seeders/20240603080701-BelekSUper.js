@@ -6,6 +6,7 @@ module.exports = {
       'Users',
       [
         {
+          id: 1,
           username: 'admin',
           email: 'admin@admin',
           password: bcrypt.hashSync('admin', 10),
@@ -15,25 +16,25 @@ module.exports = {
       ],
       {},
     );
-
+    const categories = [
+      { name: 'Цель', emoji: '🎯', userId: 1 },
+      { name: 'Покупки', emoji: '🛒', userId: 1 },
+      { name: 'Развлечения', emoji: '🎉', userId: 1 },
+      { name: 'Еда', emoji: '🍔', userId: 1 },
+      { name: 'Путешествия', emoji: '✈️', userId: 1 },
+      { name: 'Спорт', emoji: '🏋️‍♂️', userId: 1 },
+      { name: 'Здоровье', emoji: '💊', userId: 1 },
+      { name: 'Образование', emoji: '📚', userId: 1 },
+      { name: 'Транспорт', emoji: '🚗', userId: 1 },
+      { name: 'Прочее', emoji: '📦', userId: 1 },
+    ];
     await queryInterface.bulkInsert(
       'Categories',
-      [
-        {
-          name: 'Цeль',
-          emoji: 'eto emoji',
-          userId: 1,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          name: 'Покупки',
-          emoji: 'eto emoji',
-          userId: 1,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ],
+      categories.map((category) => ({
+        ...category,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })),
       {},
     );
 
@@ -52,47 +53,34 @@ module.exports = {
       {},
     );
 
-    await queryInterface.bulkInsert(
-      'Transactions',
-      [
-        {
-          sum: 500,
-          bool: null,
-          catId: 1,
-          userId: 1,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          sum: 1000,
-          bool: null,
-          catId: 1,
-          userId: 1,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ],
-      {},
-    );
+    const transactions = [];
+    const currentDate = new Date();
+    for (let i = 0; i < 6; i++) {
+      const date = new Date(currentDate);
+      date.setMonth(date.getMonth() - i);
 
-    await queryInterface.bulkInsert(
-      'TransGoals',
-      [
-        {
-          transId: 1,
-          goalId: 1,
-          createdAt: new Date(),
+      for (let j = 0; j < 10; j++) {
+        transactions.push({
+          sum: Math.floor(Math.random() * 10000),
+          bool: true,
+          catId: Math.floor(Math.random() * 9) + 2,
+          userId: 1,
+          createdAt: new Date(date.getFullYear(), date.getMonth(), j + 1),
           updatedAt: new Date(),
-        },
-        {
-          transId: 2,
-          goalId: 1,
-          createdAt: new Date(),
+        });
+
+        transactions.push({
+          sum: Math.floor(Math.random() * 10000),
+          bool: false,
+          catId: Math.floor(Math.random() * 9) + 2,
+          userId: 1,
+          createdAt: new Date(date.getFullYear(), date.getMonth(), j + 11),
           updatedAt: new Date(),
-        },
-      ],
-      {},
-    );
+        });
+      }
+    }
+
+    await queryInterface.bulkInsert('Transactions', transactions, {});
   },
 
   async down(queryInterface, Sequelize) {
