@@ -12,6 +12,20 @@ class TransAPI {
   getExpendsMonth(timeData) {
     return this.api.post('/api/transaction/expend', timeData).then(({ data }) => data);
   }
+
+ 
+
+  deleteIncome(id) {
+    return this.api.delete(`/api/transaction/income/${id}`).then(({ data }) => data);
+  }
+
+  getIncomeSum() {
+    return this.api.post('/api/transaction/income/summary').then(({ data }) => data);
+  }
+  getExpSum() {
+    return this.api.post('/api/transaction/exp/summary').then(({ data }) => data);
+
+  }
 }
 
 const transAPI = new TransAPI(axiosInstance);

@@ -81,25 +81,6 @@ module.exports = {
     }
 
     await queryInterface.bulkInsert('Transactions', transactions, {});
-
-    await queryInterface.bulkInsert(
-      'TransGoals',
-      [
-        {
-          transId: 1,
-          goalId: 1,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          transId: 2,
-          goalId: 1,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ],
-      {},
-    );
   },
 
   async down(queryInterface, Sequelize) {

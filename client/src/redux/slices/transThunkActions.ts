@@ -7,3 +7,16 @@ export const getIncomesMonthThunk = createAsyncThunk('income/getIncomesMonth', a
 export const getExpendsMonthThunk = createAsyncThunk('expend/getExpendsMonth', async (monthData) =>
   transAPI.getExpendsMonth(monthData),
 );
+
+export const deleteIncomeThunk = createAsyncThunk('income/delete', async (id) => {
+  await transAPI.deleteIncome(id);
+  return id;
+});
+export const deleteExpThunk = createAsyncThunk('expend/delete', async (id) => {
+  await transAPI.deleteIncome(id);
+  return id;
+});
+export const getIncomeSumThunk = createAsyncThunk('income/sum', async () =>
+  transAPI.getIncomeSum(),
+);
+export const getExpSumThunk = createAsyncThunk('exp/sum', async () => transAPI.getExpSum());

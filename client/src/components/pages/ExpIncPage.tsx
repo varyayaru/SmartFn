@@ -5,7 +5,12 @@ import { FixedSizeList as List } from 'react-window';
 import ExpIncCard from '../ui/ExpIncCard';
 import ListCard from '../ui/ListCard';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import { getExpendsMonthThunk, getIncomesMonthThunk } from '../../redux/slices/transThunkActions';
+import {
+  deleteExpThunk,
+  deleteIncomeThunk,
+  getExpendsMonthThunk,
+  getIncomesMonthThunk,
+} from '../../redux/slices/transThunkActions';
 import ExpPieChart from '../ui/ExpPieChart';
 import IncPieChart from '../ui/IncPieChart';
 
@@ -65,7 +70,12 @@ export default function ExpIncPage(): JSX.Element {
       },
     ],
   };
-
+  const deleteHandlerIncome = (id) => {
+    void dispatch(deleteIncomeThunk(id));
+  };
+  const deleteHandlerExp = (id) => {
+    void dispatch(deleteExpThunk(id));
+  };
   return (
     <Flex
       marginTop="50px"
@@ -90,7 +100,12 @@ export default function ExpIncPage(): JSX.Element {
             <UnorderedList styleType="none" margin={0}>
               <List height={250} itemCount={incomes.length} itemSize={35} width="100%">
                 {({ index, style }) => (
-                  <ListCard index={index} style={style} item={incomes[index]} />
+                  <ListCard
+                    index={index}
+                    style={style}
+                    item={incomes[index]}
+                    deleteHandler={deleteHandlerIncome}
+                  />
                 )}
               </List>
             </UnorderedList>
@@ -113,7 +128,7 @@ export default function ExpIncPage(): JSX.Element {
             <UnorderedList styleType="none" margin={0}>
               <List height={250} itemCount={expends.length} itemSize={35} width="100%">
                 {({ index, style }) => (
-                  <ListCard index={index} style={style} item={expends[index]} />
+                  <ListCard index={index} style={style} item={expends[index]}  deleteHandler={deleteHandlerExp} />
                 )}
               </List>
             </UnorderedList>

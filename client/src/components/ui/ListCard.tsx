@@ -1,8 +1,10 @@
 import React from 'react';
 import { Box, Flex, ListItem, Stack, Text } from '@chakra-ui/react';
 import { ArrowRightIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { deleteIncomeThunk } from '../../redux/slices/transThunkActions';
 
-export default function ListCard({ index, style, item }) {
+export default function ListCard({ index, style, item, deleteHandler }) {
   return (
     <ListItem
       style={style}
@@ -15,8 +17,8 @@ export default function ListCard({ index, style, item }) {
       alignItems="center"
       justifyContent="space-between"
     >
-      <div style={{ display: 'flex', gap: '10px', alignItems:'center' }}>
-        <SmallCloseIcon  />
+      <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+        <SmallCloseIcon onClick={() => deleteHandler(item.id)} />
         <Text fontSize="md" color="grey">
           {item.Category ? (
             <Box gap="5">

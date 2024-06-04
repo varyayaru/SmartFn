@@ -1,12 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getExpendsMonthThunk, getIncomesMonthThunk } from './transThunkActions';
-
+import {
+  deleteExpThunk,
+  deleteIncomeThunk,
+  getExpSumThunk,
+  getExpendsMonthThunk,
+  getIncomeSumThunk,
+  getIncomesBarChartThunk,
+  getIncomesMonthThunk,
+} from './transThunkActions';
 
 const initialState = {
   incomes: [],
   expends: [],
   choosenMonth: new Date().getMonth() + 1,
   choosenYear: new Date().getFullYear(),
+  incomeSums: null,
+  expSums: null,
 };
 const transSlice = createSlice({
   name: 'trans',
@@ -35,6 +44,19 @@ const transSlice = createSlice({
     });
     builder.addCase(getExpendsMonthThunk.fulfilled, (state, { payload }) => {
       state.expends = payload;
+    });
+
+    builder.addCase(deleteIncomeThunk.fulfilled, (state, { payload }) => {
+      state.incomes = state.incomes.filter((el) => el.id !== payload);
+    });
+    builder.addCase(deleteExpThunk.fulfilled, (state, { payload }) => {
+      state.expends = state.expends.filter((el) => el.id !== payload);
+    });
+    builder.addCase(getIncomeSumThunk.fulfilled, (state, { payload }) => {
+      state.incomeSums = payload;
+    });
+    builder.addCase(getExpSumThunk.fulfilled, (state, { payload }) => {
+      state.expSums = payload;
     });
   },
 });
