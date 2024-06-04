@@ -31,6 +31,7 @@ goalRouter.post('/', verifyAccessToken, async (req, res) => {
 goalRouter.delete('/:id', verifyAccessToken, async (req, res) => {
   const { id } = req.params;
   try {
+    await TransGoal.destroy({ where: { goalId: id } });
     await Goal.destroy({ where: { id } });
     res.sendStatus(200);
   } catch (error) {
@@ -43,7 +44,8 @@ goalRouter.put('/:id', verifyAccessToken, async (req, res) => {
   try {
     await Goal.update(req.body, { where: { id } });
     const data = await Goal.findByPk(id);
-    res.status(204).json(data);
+
+    res.json(data);
   } catch (error) {
     res.status(500).json({ message: 'Oshibka GOAL router' });
   }
