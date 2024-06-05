@@ -84,7 +84,11 @@ transactionRouter.post('/createexpend', verifyAccessToken, async (req, res) => {
       catId,
       userId: res.locals.user.id,
     });
-    res.json(data);
+    const dataWithCat = await Transaction.findOne({
+      where: { id: data.id },
+      include: Category,
+    });
+    res.json(dataWithCat);
   } catch (error) {
     res.status(500).json({ message: 'Oshibka Transaction router' });
   }

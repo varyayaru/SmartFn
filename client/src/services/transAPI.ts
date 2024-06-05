@@ -13,8 +13,6 @@ class TransAPI {
     return this.api.post('/api/transaction/expend', timeData).then(({ data }) => data);
   }
 
- 
-
   deleteIncome(id) {
     return this.api.delete(`/api/transaction/income/${id}`).then(({ data }) => data);
   }
@@ -22,9 +20,17 @@ class TransAPI {
   getIncomeSum() {
     return this.api.post('/api/transaction/income/summary').then(({ data }) => data);
   }
+
   getExpSum() {
     return this.api.post('/api/transaction/exp/summary').then(({ data }) => data);
+  }
 
+  getCreateIncome(data) {
+    return this.api.post('api/transaction/createincome', data).then(({ data }) => data);
+  }
+
+  getCreateExpend(data) {
+    return this.api.post('api/transaction/createexpend', data).then(({ data }) => data);
   }
 }
 

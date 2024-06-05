@@ -1,8 +1,8 @@
 const categoryRouter = require('express').Router();
 const { startOfMonth, endOfMonth } = require('date-fns');
+const { Op } = require('sequelize');
 const { Category, Transaction } = require('../db/models');
 const verifyAccessToken = require('../middlewares/verifyAccessToken');
-const { Op } = require('sequelize');
 
 categoryRouter.post('/trans', verifyAccessToken, async (req, res) => {
   try {
@@ -50,6 +50,15 @@ categoryRouter.delete('/:id', verifyAccessToken, async (req, res) => {
     res.sendStatus(200);
   } catch (error) {
     res.status(500).json({ message: 'Oshibka category router' });
+  }
+});
+
+categoryRouter.get('/', verifyAccessToken, async (req, res) => {
+  try {
+    const category = await Category.findAll();
+    res.json(category);
+  } catch (error) {
+    console.log(error);
   }
 });
 

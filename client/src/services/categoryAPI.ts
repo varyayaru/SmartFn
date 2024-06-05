@@ -8,6 +8,10 @@ class CategoryAPI {
   getCatsTrans(date) {
     return this.api.post('/api/category/trans', date).then(({ data }) => data);
   }
+
+  getCategory() {
+    return this.api.get('/api/category/').then(({ data }) => data);
+  }
 }
 const categoryAPI = new CategoryAPI(axiosInstance);
 

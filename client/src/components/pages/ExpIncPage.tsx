@@ -36,11 +36,17 @@ export default function ExpIncPage(): JSX.Element {
 
   const incomes = useAppSelector((state) => state.trans.incomes);
   const expends = useAppSelector((state) => state.trans.expends);
-
+// console.log(expends)
   const categoryData = expends.reduce((acc, transaction) => {
+    if (!transaction || !transaction.Category) {
+      // Если транзакция или категория отсутствуют, пропускаем текущую транзакцию
+      return acc;
+    }
+
     const categoryId = transaction.Category.id;
     const { emoji } = transaction.Category;
     const { sum } = transaction;
+
     if (!acc[categoryId]) {
       acc[categoryId] = {
         sum: 0,
@@ -128,7 +134,12 @@ export default function ExpIncPage(): JSX.Element {
             <UnorderedList styleType="none" margin={0}>
               <List height={250} itemCount={expends.length} itemSize={35} width="100%">
                 {({ index, style }) => (
-                  <ListCard index={index} style={style} item={expends[index]}  deleteHandler={deleteHandlerExp} />
+                  <ListCard
+                    index={index}
+                    style={style}
+                    item={expends[index]}
+                    deleteHandler={deleteHandlerExp}
+                  />
                 )}
               </List>
             </UnorderedList>

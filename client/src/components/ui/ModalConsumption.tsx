@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -13,39 +13,38 @@ import {
   FormHelperText,
   useColorModeValue,
   Box,
-  Text,
   Grid,
+  Button,
 } from '@chakra-ui/react';
 import { MinusIcon } from '@chakra-ui/icons';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { getCategoryThunk } from '../../redux/slices/catsThunkActions';
+import { getCreateExpend } from '../../redux/slices/transThunkActions';
 
 export default function ModalConsumption({ isOpen, onClose }): JSX.Element {
+  const dispatch = useAppDispatch();
+  const [selectedCategory, setSelectedCategory] = useState(null); // Состояние для выбранной категории
+  const [expenseAmount, setExpenseAmount] = useState(''); // Состояние для суммы расхода
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.currentTarget));
+    data.catId = selectedCategory;
+
+    void dispatch(getCreateExpend(data));
     onClose();
   };
 
-  const kakakakaka = [
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-    { emoji: '💩', text: 'kakakakaka' },
-  ];
+  useEffect(() => {
+    void dispatch(getCategoryThunk());
+  }, [dispatch]);
+
+  const expendStor = useAppSelector((store) => store.cats.categories);
+  console.log(expendStor);
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category); // Обновляем выбранную категорию
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -57,7 +56,12 @@ export default function ModalConsumption({ isOpen, onClose }): JSX.Element {
           <form onSubmit={submitHandler}>
             <FormControl>
               <FormLabel>Сумма:</FormLabel>
-              <Input type="text" name="name" />
+              <Input
+                type="number"
+                name="sum"
+                value={expenseAmount}
+                onChange={(e) => setExpenseAmount(e.target.value)}
+              />
               <FormHelperText mt={5}>Выберите категорию:</FormHelperText>
               <Box
                 bg={useColorModeValue('gray.100', 'gray.900')}
@@ -71,11 +75,17 @@ export default function ModalConsumption({ isOpen, onClose }): JSX.Element {
                 maxHeight="200px"
               >
                 <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-                  {kakakakaka.map((item, index) => (
-                    <Box key={index} display="flex" flexDirection="column" alignItems="center">
-                      <Text fontSize={{ base: 'lg', md: 'xx-large' }}>{item.emoji}</Text>
-                      <Text fontSize={{ base: 'sm', md: 'md' }}>{item.text}</Text>
-                    </Box>
+                  {expendStor.map((item) => (
+                    <Button
+                      key={item.id}
+                      leftIcon={item.emoji}
+                      variant="outline"
+                      colorScheme="teal"
+                      onClick={() => handleCategoryClick(item.id)} // Обработчик клика на категорию
+                      width="150px"
+                    >
+                      {item.name}
+                    </Button>
                   ))}
                 </Grid>
               </Box>

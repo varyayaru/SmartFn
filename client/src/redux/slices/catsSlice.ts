@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getExpendsMonthThunk, getIncomesMonthThunk } from './transThunkActions';
-
+import { getCategoryThunk } from './catsThunkActions';
 
 const initialState = {
   categories: [],
@@ -36,9 +36,12 @@ const catsSlice = createSlice({
     builder.addCase(getExpendsMonthThunk.fulfilled, (state, { payload }) => {
       state.expends = payload;
     });
+    builder.addCase(getCategoryThunk.fulfilled, (state, { payload }) => {
+      state.categories = payload;
+    });
   },
 });
 
-export const { setPrevMonth, setNextMonth } = transSlice.actions;
-const transReducer = transSlice.reducer;
-export default transReducer;
+export const { setPrevMonth, setNextMonth } = catsSlice.actions;
+const catsReducer = catsSlice.reducer;
+export default catsReducer;
