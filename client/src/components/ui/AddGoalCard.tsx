@@ -1,6 +1,8 @@
 import { Button, Card, createIcon, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import ModalGoalEditAdd from './ModalGoalEditAdd';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { createGoalThunk } from '../../redux/slices/goalsThunkActions';
 
 const PlusIcon = createIcon({
   displayName: 'PlusIcon',
@@ -11,7 +13,14 @@ const PlusIcon = createIcon({
 });
 export default function AddGoalCard(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const dispatch = useAppDispatch();
+  const addHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    void dispatch(createGoalThunk(data));
+    onClose();
+  };
   return (
     <Card minH="200px" variant="unstyled" mb={6} alignItems="center" justifyContent="center">
       <Button
@@ -30,7 +39,12 @@ export default function AddGoalCard(): JSX.Element {
         <PlusIcon boxSize="100%" />
       </Button>
 
-      <ModalGoalEditAdd isOpen={isOpen} onClose={onClose} title="Добавить цель" />
+      <ModalGoalEditAdd
+        isOpen={isOpen}
+        onClose={onClose}
+        title="Добавить цель"
+        addHandler={addHandler}
+      />
     </Card>
   );
 }
