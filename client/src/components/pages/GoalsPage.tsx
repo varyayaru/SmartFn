@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, useDisclosure } from '@chakra-ui/react';
+import { Box, Grid } from '@chakra-ui/react';
 import GoalCard from '../ui/GoalCard';
 import AddGoalCard from '../ui/AddGoalCard';
 

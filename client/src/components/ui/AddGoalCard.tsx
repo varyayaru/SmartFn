@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardBody, createIcon, useDisclosure } from '@chakra-ui/react';
+import { Button, Card, createIcon, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import ModalGoalEditAdd from './ModalGoalEditAdd';
 
@@ -13,9 +13,7 @@ export default function AddGoalCard(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Card
-    minH='200px'  variant="unstyled" mb={6} alignItems='center' justifyContent='center'
-    >
+    <Card minH="200px" variant="unstyled" mb={6} alignItems="center" justifyContent="center">
       <Button
         onClick={onOpen}
         variant="unstyled"
@@ -32,7 +30,7 @@ export default function AddGoalCard(): JSX.Element {
         <PlusIcon boxSize="100%" />
       </Button>
 
-      <ModalGoalEditAdd isOpen={isOpen} onClose={onClose} title='Добавить цель' />
+      <ModalGoalEditAdd isOpen={isOpen} onClose={onClose} title="Добавить цель" />
     </Card>
   );
 }

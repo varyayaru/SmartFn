@@ -15,31 +15,38 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import Picker from 'emoji-picker-react';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { getCategoriesThunk, updateCategoriesThunk } from '../../redux/slices/CatThunkAction';
 
 type ModalCategoryProps = {
   title: string;
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  initialValues?: { name: string; emoji: string };
-  // catId: number;
+
+  catId: number;
+  catEmoji: string;
+  catName: string;
 };
 
-export default function ModalCategory({
+export default function EditCatModal({
   title,
   isOpen,
   onClose,
-  onSubmit,
-  initialValues = { name: '', emoji: '' },
-  // catId,
+  catId,
+  catEmoji,
+  catName,
 }: ModalCategoryProps): JSX.Element {
-  const [emoji, setEmoji] = useState(initialValues.emoji);
-  // const [name, setName] = useState(initialValues.name);
+  const [emoji, setEmoji] = useState(catEmoji);
+  const [name, setName] = useState(catName);
+  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   setEmoji(initialValues.emoji);
-  //   setName(initialValues.name);
-  // }, [initialValues]);
+  const upDateHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    const formData = { name, emoji };
+
+    void dispatch(updateCategoriesThunk({ ...formData, id: catId }));
+    onClose();
+  };
 
   const onEmojiClick = (emojiObject) => {
     setEmoji(emojiObject.emoji);
@@ -52,14 +59,14 @@ export default function ModalCategory({
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={upDateHandler}>
             <FormControl>
               <FormLabel>Название категории</FormLabel>
               <Input
                 name="name"
                 placeholder="Wildberries"
-                // value={name}
-                // onChange={(e) => setName(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </FormControl>
             <Box mt={4}>

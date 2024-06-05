@@ -128,7 +128,12 @@ export default function ExpIncPage(): JSX.Element {
             <UnorderedList styleType="none" margin={0}>
               <List height={250} itemCount={expends.length} itemSize={35} width="100%">
                 {({ index, style }) => (
-                  <ListCard index={index} style={style} item={expends[index]}  deleteHandler={deleteHandlerExp} />
+                  <ListCard
+                    index={index}
+                    style={style}
+                    item={expends[index]}
+                    deleteHandler={deleteHandlerExp}
+                  />
                 )}
               </List>
             </UnorderedList>
