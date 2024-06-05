@@ -20,6 +20,7 @@ import { MinusIcon } from '@chakra-ui/icons';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { getCategoryThunk } from '../../redux/slices/catsThunkActions';
 import { getCreateExpend } from '../../redux/slices/transThunkActions';
+import { getCategoriesThunk } from '../../redux/slices/CatThunkAction';
 
 export default function ModalConsumption({ isOpen, onClose }): JSX.Element {
   const dispatch = useAppDispatch();
@@ -36,10 +37,10 @@ export default function ModalConsumption({ isOpen, onClose }): JSX.Element {
   };
 
   useEffect(() => {
-    void dispatch(getCategoryThunk());
+    void dispatch(getCategoriesThunk());
   }, [dispatch]);
 
-  const expendStor = useAppSelector((store) => store.cats.categories);
+  const expendStor = useAppSelector((store) => store.cat.categories);
   console.log(expendStor);
 
   const handleCategoryClick = (category) => {

@@ -19,17 +19,21 @@ export const options = {
 
   plugins: {
     legend: {
-      position: 'top' as const,
+      display: false,
     },
 
     title() {
       return '';
     },
+    tooltip: {
+      bodyFont: {
+        size: 26,
+      },
+    },
   },
   bodyFont: {
     size: 26,
   },
-  displayColors: false,
 };
 
 const now = new Date();

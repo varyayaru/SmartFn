@@ -5,19 +5,19 @@ import type { AuthResponseType, AuthSignInType, AuthSignUpType } from '../types/
 class TransAPI {
   constructor(private readonly api: AxiosInstance) {}
 
-  getIncomesMonth(timeData) {
+  getIncomesMonth(timeData): Promise {
     return this.api.post('/api/transaction/income', timeData).then(({ data }) => data);
   }
 
-  getExpendsMonth(timeData) {
+  getExpendsMonth(timeData): Promise {
     return this.api.post('/api/transaction/expend', timeData).then(({ data }) => data);
   }
 
-  deleteIncome(id) {
+  deleteIncome(id): Promise {
     return this.api.delete(`/api/transaction/income/${id}`).then(({ data }) => data);
   }
 
-  getIncomeSum() {
+  getIncomeSum(): Promise {
     return this.api.post('/api/transaction/income/summary').then(({ data }) => data);
   }
 
