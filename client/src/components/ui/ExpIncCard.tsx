@@ -1,49 +1,60 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Button, Card, CardBody, Divider, Flex, Heading, Stack, Text } from '@chakra-ui/react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPrevMonth, setNextMonth } from '../../redux/slices/transSlice';
 
 const months = [
-    'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-    'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
-  ];
+  'Январь',
+  'Февраль',
+  'Март',
+  'Апрель',
+  'Май',
+  'Июнь',
+  'Июль',
+  'Август',
+  'Сентябрь',
+  'Октябрь',
+  'Ноябрь',
+  'Декабрь',
+];
 
-type ExpIncCardTypes = {
-  title: string;
-  children: JSX.Element;
-};
-export default function ExpIncCard({ title, children }: ExpIncCardTypes): JSX.Element {
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+export default function ExpIncCard({ title, children }): JSX.Element {
+  const dispatch = useDispatch();
+  const choosenMonth = useSelector((state) => state.trans.choosenMonth);
+  const choosenYear = useSelector((state) => state.trans.choosenYear);
 
   const prevMonth = () => {
-    setCurrentMonth((prev) => (prev === 0 ? 11 : prev - 1));
+    dispatch(setPrevMonth());
   };
 
   const nextMonth = () => {
-    setCurrentMonth((prev) => (prev === 11 ? 0 : prev + 1));
+    dispatch(setNextMonth());
   };
+
   return (
-   
-    <Card minH="800px" alignContent='center' textAlign='center'>
+    <Card
+      width="700px"
+      minH="800px"
+      justifyContent="center"
+      alignContent="center"
+      textAlign="center"
+    >
       <CardBody>
-        <Stack mt="6" spacing="3">
+        <Stack spacing="5">
           <Heading size="md">{title}</Heading>
-          <Flex align="center">
-            <Button onClick={prevMonth}>&lt;</Button>
-            <Box mx="4">
-              <Text fontSize="xl" fontWeight="bold">
-                {months[currentMonth]}
-              </Text>
-            </Box>
-            <Button onClick={nextMonth}>&gt;</Button>
+          <Flex direction="column" align="center" justify="center" gap="30px">
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Button onClick={prevMonth}>&lt;</Button>
+              <Box mx="4">
+                <Text fontSize="xl" fontWeight="bold">
+                  {months[choosenMonth - 1]} {choosenYear}
+                </Text>
+              </Box>
+              <Button onClick={nextMonth}>&gt;</Button>
+            </div>
+            {children}
           </Flex>
-          <Text>
-            This sofa is perfect for modern tropical spaces, baroque inspired spaces, earthy toned
-            spaces and for people who love a chic design with a sprinkle of vintage design.
-          </Text>
-          <Text color="blue.600" fontSize="2xl">
-            $450
-          </Text>
         </Stack>
-        {children}
       </CardBody>
       <Divider />
     </Card>
