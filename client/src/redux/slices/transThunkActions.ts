@@ -20,3 +20,10 @@ export const getIncomeSumThunk = createAsyncThunk('income/sum', async () =>
   transAPI.getIncomeSum(),
 );
 export const getExpSumThunk = createAsyncThunk('exp/sum', async () => transAPI.getExpSum());
+
+export const getCreateIncome = createAsyncThunk('income/createincome', async (data) =>
+  transAPI.getCreateIncome(data),
+);
+export const getCreateExpend = createAsyncThunk('expend/createexpend', async (data) =>
+  transAPI.getCreateExpend(data),
+);

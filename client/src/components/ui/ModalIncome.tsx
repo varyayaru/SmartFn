@@ -13,10 +13,15 @@ import {
   IconButton,
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { getCreateIncome } from '../../redux/slices/transThunkActions';
 
 export default function ModalIncome({ isOpen, onClose }): JSX.Element {
+  const dispatch = useAppDispatch();
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    const formSum = Object.fromEntries(new FormData(e.currentTarget));
+    void dispatch(getCreateIncome(formSum));
     onClose();
   };
 
@@ -30,7 +35,7 @@ export default function ModalIncome({ isOpen, onClose }): JSX.Element {
           <form onSubmit={submitHandler}>
             <FormControl>
               <FormLabel>Сумма:</FormLabel>
-              <Input type="text" name="name" />
+              <Input type="number" name="sum" />
             </FormControl>
             <Box display="flex" justifyContent="center" mt={4}>
               <IconButton

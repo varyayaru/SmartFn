@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   deleteExpThunk,
   deleteIncomeThunk,
+  getCreateExpend,
+  getCreateIncome,
   getExpSumThunk,
   getExpendsMonthThunk,
   getIncomeSumThunk,
@@ -57,6 +59,12 @@ const transSlice = createSlice({
     });
     builder.addCase(getExpSumThunk.fulfilled, (state, { payload }) => {
       state.expSums = payload;
+    });
+    builder.addCase(getCreateIncome.fulfilled, (state, { payload }) => {
+      state.incomes = [payload, ...state.incomes];
+    });
+    builder.addCase(getCreateExpend.fulfilled, (state, { payload }) => {
+      state.expends = [payload, ...state.expends];
     });
   },
 });

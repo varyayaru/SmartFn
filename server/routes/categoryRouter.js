@@ -64,6 +64,15 @@ categoryRouter.delete('/:id', verifyAccessToken, async (req, res) => {
   }
 });
 
+categoryRouter.get('/', verifyAccessToken, async (req, res) => {
+  try {
+    const category = await Category.findAll();
+    res.json(category);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 categoryRouter.put('/:id', verifyAccessToken, async (req, res) => {
   const { id } = req.params;
   try {
