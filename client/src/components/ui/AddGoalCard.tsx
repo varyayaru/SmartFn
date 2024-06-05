@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardBody, createIcon, useDisclosure } from '@chakra-ui/react';
+import { Button, Card, createIcon, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import ModalGoalEditAdd from './ModalGoalEditAdd';
 import { useAppDispatch } from '../../hooks/reduxHooks';

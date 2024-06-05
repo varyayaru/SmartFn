@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { CheckIcon } from '@chakra-ui/icons';
 import {
   Box,
-  Button,
   IconButton,
   Input,
   Modal,

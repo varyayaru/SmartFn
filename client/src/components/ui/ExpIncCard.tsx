@@ -31,7 +31,6 @@ export default function ExpIncCard({ title, children }): JSX.Element {
     dispatch(setNextMonth());
   };
 
-  
   return (
     <Card
       width="700px"
