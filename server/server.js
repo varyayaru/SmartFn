@@ -1,6 +1,6 @@
-const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const express = require('express')
 const cookieParser = require('cookie-parser');
 const tokensRouter = require('./routes/tokensRouter');
 const userRouter = require('./routes/userRouter');

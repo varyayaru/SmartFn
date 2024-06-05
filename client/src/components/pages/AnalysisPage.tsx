@@ -1,23 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Button, Flex, List, Text, UnorderedList, useColorModeValue } from '@chakra-ui/react';
-import PieChart from '../ui/PieChart';
+import React, { useEffect } from 'react';
+import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
 import BarChart from '../ui/BarChart';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import { getExpendsMonthThunk, getIncomesMonthThunk } from '../../redux/slices/transThunkAction';
-import ListCard from '../ui/ListCard';
-
-export const data = {
-  labels: ['Доходы', 'Расходы'],
-  datasets: [
-    {
-      label: 'Сумма',
-      data: [12, 19], // данные здесь
-      backgroundColor: ['rgba(94, 230, 83, 0.55)', 'rgba(233, 66, 66, 0.55)'],
-      borderColor: ['rgba(94, 230, 83, 1)', 'rgba(233, 66, 66, 0.50)'],
-      borderWidth: 1,
-    },
-  ],
-};
+import { setNextMonth, setPrevMonth } from '../../redux/slices/transSlice';
+import { useAppSelector } from '../../hooks/reduxHooks';
+import { getExpendsMonthThunk, getIncomesMonthThunk } from '../../redux/slices/transThunkActions';
+import AnalysisPieChart from '../ui/AnalysisPieChart';
 
 const months = [
   'Январь',
@@ -35,8 +23,9 @@ const months = [
 ];
 
 export default function AnalysisPage(): JSX.Element {
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
+  const choosenMonth = useAppSelector((state) => state.trans.choosenMonth);
+  const choosenYear = useAppSelector((state) => state.trans.choosenYear);
   const month = useAppSelector((state) => state.trans.choosenMonth);
   const year = useAppSelector((state) => state.trans.choosenYear);
 
@@ -47,13 +36,29 @@ export default function AnalysisPage(): JSX.Element {
 
   const incomes = useAppSelector((state) => state.trans.incomes);
   const expends = useAppSelector((state) => state.trans.expends);
-
-  const prevMonth = (): void => {
-    setCurrentMonth((prev) => (prev === 0 ? 11 : prev - 1));
+  console.log(incomes);
+  const prevMonth = () => {
+    dispatch(setPrevMonth());
   };
 
-  const nextMonth = (): void => {
-    setCurrentMonth((prev) => (prev === 11 ? 0 : prev + 1));
+  const nextMonth = () => {
+    dispatch(setNextMonth());
+  };
+
+  const totalIncomesSum = incomes.reduce((acc, cur) => acc + cur.sum, 0);
+  const totalExpendsSum = expends.reduce((acc, cur) => acc + cur.sum, 0);
+
+  const data = {
+    labels: ['💸', '🛍️'],
+    datasets: [
+      {
+        label: '',
+        data: [totalIncomesSum, totalExpendsSum],
+        backgroundColor: ['rgba(94, 230, 83, 0.55)', 'rgba(233, 66, 66, 0.55)'],
+        borderColor: ['rgba(94, 230, 83, 1)', 'rgba(233, 66, 66, 0.50)'],
+        borderWidth: 1,
+      },
+    ],
   };
 
   return (
@@ -91,16 +96,16 @@ export default function AnalysisPage(): JSX.Element {
               alignItems: 'center',
             }}
           >
-            <PieChart
+            <AnalysisPieChart
               data={data}
               wid={{ base: '200px', md: '300px' }}
               hei={{ base: '200px', md: '300px' }}
             />
-            <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <Button onClick={prevMonth}>&lt;</Button>
               <Box mx="4">
                 <Text fontSize="xl" fontWeight="bold">
-                  {months[currentMonth]}
+                  {months[choosenMonth - 1]} {choosenYear}
                 </Text>
               </Box>
               <Button onClick={nextMonth}>&gt;</Button>

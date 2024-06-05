@@ -1,12 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import catAPI from '../../services/CatAPI';
+import transAPI from '../../services/transAPI';
 
 type AddCategoryPayload = {
   name: string;
   emoji: string;
 };
 
-export const getCategoriesThunk = createAsyncThunk('categories/getCategories', async (_) =>
+export const getCatsTransThunk = createAsyncThunk('income/getIncomesMonth', async (date) =>
+  transAPI.getIncomesMonth(date),
+);
+
+export const getCategoriesThunk = createAsyncThunk('categories/getCategories', async () =>
   catAPI.getCat().then((data) => data),
 );
 

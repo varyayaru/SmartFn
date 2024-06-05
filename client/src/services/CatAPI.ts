@@ -4,8 +4,14 @@ import axiosInstance from './axiosInstance';
 class CatAPI {
   constructor(private readonly api: AxiosInstance) {}
 
+  getCatsTrans(date): Promise {
+    return this.api.post('/api/category/trans', date).then(({ data }) => data);
+  }
+
   getCat(): Promise {
-    return this.api('/api/category').then(({ data }) => data);
+    return this.api('/api/category')
+      .then(({ data }) => data)
+      .catch(console.log);
   }
 
   delCat(id): Promise<AxiosResponse> {
@@ -15,8 +21,10 @@ class CatAPI {
       .catch(console.log);
   }
 
-  updateCat(formData, id): Promise {
-    return this.api.put(`/api/category/${id}`, formData).then(({ data }) => data);
+  updateCat(formData): Promise {
+    console.log(formData);
+
+    return this.api.put(`/api/category/${formData.id}`, formData).then(({ data }) => data);
   }
 
   addCat(formData): Promise {

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { useAppSelector } from './hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
 import BasicLayout from './components/layouts/BasicLayout';
 import PrivateRouter from './components/HOCs/PrivateRouter';
 import SignUpPage from './components/pages/SignUpPage';
@@ -9,9 +9,11 @@ import AnalysisPage from './components/pages/AnalysisPage';
 import ExpIncPage from './components/pages/ExpIncPage';
 import GoalsPage from './components/pages/GoalsPage';
 import CategoriesPage from './components/pages/CategoriesPage';
+import { getIncomesMonthThunk } from './redux/slices/transThunkActions';
 
 function App(): JSX.Element {
   const user = useAppSelector((state) => state.auth.userData);
+
   const router = createBrowserRouter([
     {
       path: '/',

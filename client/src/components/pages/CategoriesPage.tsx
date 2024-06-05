@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { getCategoriesThunk } from '../../redux/slices/CatThunkAction';
 
 export default function CategoriesPage(): JSX.Element {
-  const categories = useAppSelector((state) => state.cat.category);
+  const categories = useAppSelector((state) => state.cat.categories);
   const dispatch = useAppDispatch();
 
   useEffect((): void => {
@@ -22,7 +22,7 @@ export default function CategoriesPage(): JSX.Element {
       templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
     >
       <AddCatCard />
-      {categories.map((category) => (
+      {categories?.map((category) => (
         <CategoryCard
           key={category.id}
           emoji={category.emoji}

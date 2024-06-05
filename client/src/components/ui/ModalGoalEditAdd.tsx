@@ -1,6 +1,6 @@
 import { CheckIcon } from '@chakra-ui/icons';
 import {
-    Box,
+  Box,
   Button,
   IconButton,
   Input,
@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-export default function ModalGoalEditAdd({isOpen,onClose,title}): JSX.Element {
+export default function ModalGoalEditAdd({ isOpen, onClose, title }): JSX.Element {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -26,7 +26,7 @@ export default function ModalGoalEditAdd({isOpen,onClose,title}): JSX.Element {
           <Input placeholder="Цена цели" mt={4} />
         </ModalBody>
         <ModalFooter>
-        <Box width="100%" display="flex" justifyContent="center">
+          <Box width="100%" display="flex" justifyContent="center">
             <IconButton
               marginBottom="40px"
               type="submit"

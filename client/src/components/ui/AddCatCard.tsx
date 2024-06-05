@@ -1,8 +1,7 @@
-import { AddIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import { Button, Card, createIcon, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import ModalCategory from './ModalCategory';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { useAppDispatch } from '../../hooks/reduxHooks';
 import { addCategoriesThunk } from '../../redux/slices/CatThunkAction';
 
 const PlusIcon = createIcon({

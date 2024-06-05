@@ -4,6 +4,7 @@ import React from 'react';
 import ModalCategory from './ModalCategory';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { delCategoriesThunk, updateCategoriesThunk } from '../../redux/slices/CatThunkAction';
+import EditCatModal from './EditCatModal';
 
 type CategoryCardProps = {
   emoji: string;
@@ -17,16 +18,6 @@ export default function CategoryCard({ emoji, name, catId }: CategoryCardProps):
 
   const deleteHandler = (id: number): void => {
     void dispatch(delCategoriesThunk(id));
-  };
-
-  const upDateHandler = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.currentTarget)) as {
-      name: string;
-      emoji: string;
-    };
-    void dispatch(updateCategoriesThunk({ ...formData, id: catId }));
-    onClose();
   };
 
   return (
@@ -43,12 +34,15 @@ export default function CategoryCard({ emoji, name, catId }: CategoryCardProps):
           <DeleteIcon onClick={() => deleteHandler(catId)} />
         </CardFooter>
       </Card>
-      <ModalCategory
+      <EditCatModal
         title="Редактировать категорию расходов"
         isOpen={isOpen}
         onClose={onClose}
-        onSubmit={upDateHandler}
-        initialValues={{ name, emoji }}
+        catId={catId}
+        catEmoji={emoji}
+        catName={name}
+        // onSubmit={upDateHandler}
+        // initialValues={{ name, emoji }}
       />
     </>
   );

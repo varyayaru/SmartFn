@@ -2,7 +2,6 @@ import React from 'react';
 import { CheckIcon } from '@chakra-ui/icons';
 import {
   Box,
-  Button,
   IconButton,
   Input,
   Modal,
@@ -14,7 +13,7 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react';
 
-export default function ModalAddMoneyGoal({addIsOpen,addOnClose}): JSX.Element {
+export default function ModalAddMoneyGoal({ addIsOpen, addOnClose }): JSX.Element {
   return (
     <Modal isOpen={addIsOpen} onClose={addOnClose}>
       <ModalOverlay />
