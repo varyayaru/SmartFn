@@ -1,10 +1,11 @@
 const OpenAI = require('openai');
 const express = require('express');
+require('dotenv').config();
 
 const aiRouter = express.Router();
 
 const openai = new OpenAI({
-  apiKey: 'sk-proj-WxTmyITKKwOWYVHAXRckT3BlbkFJDpDmFxz9lzAWAytc0Ej4',
+  apiKey: process.env.AI_API_KEY,
 });
 
 aiRouter.post('/', async (req, res) => {
