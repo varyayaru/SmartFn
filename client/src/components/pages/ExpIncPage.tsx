@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../css/expinc.css';
-import { Flex, Box, UnorderedList } from '@chakra-ui/react';
+import { Flex, Box, UnorderedList, useToast } from '@chakra-ui/react';
 import { FixedSizeList as List } from 'react-window';
 import ExpIncCard from '../ui/ExpIncCard';
 import ListCard from '../ui/ListCard';
@@ -13,6 +13,7 @@ import {
 } from '../../redux/slices/transThunkActions';
 import ExpPieChart from '../ui/ExpPieChart';
 import IncPieChart from '../ui/IncPieChart';
+import axiosInstance from '../../services/axiosInstance';
 
 const generateColors = (numColors) => {
   const colors = [];
@@ -36,10 +37,8 @@ export default function ExpIncPage(): JSX.Element {
 
   const incomes = useAppSelector((state) => state.trans.incomes);
   const expends = useAppSelector((state) => state.trans.expends);
-  // console.log(expends)
   const categoryData = expends.reduce((acc, transaction) => {
     if (!transaction || !transaction.Category) {
-      // Если транзакция или категория отсутствуют, пропускаем текущую транзакцию
       return acc;
     }
 
@@ -63,9 +62,8 @@ export default function ExpIncPage(): JSX.Element {
   const emojisArray = Object.values(categoryData).map((category) => category.emoji);
   const colors = generateColors(emojisArray.length);
 
-  // Создаем data для PieChart
   const data = {
-    labels: emojisArray, // Только эмодзи
+    labels: emojisArray,
     datasets: [
       {
         label: '',
@@ -82,6 +80,66 @@ export default function ExpIncPage(): JSX.Element {
   const deleteHandlerExp = (id) => {
     void dispatch(deleteExpThunk(id));
   };
+
+  const toast = useToast();
+
+  const promptIncome =
+    'На основе этих данных, пожалуйста дай мне совет по току как больше зарабатывать в стиле "вот бы был у нас метод инвестировать в биткоин и поднимать деньги 3 предложения максимум по 10 слов';
+
+  const promptExp = `
+  ${JSON.stringify(expends)}
+  На основе этих данных, пожалуйста дай мне совет в стиле "вот бы был у нас метод чтобы...(пример Вот бы был у нас метод чтобы оптимизировать бюджет на развлечения. Можно рассмотреть альтернативные варианты досуга для уменьшения расходов.) 
+  3 предложения максимум по 10 слов
+  `;
+
+  const adviceIncomeChat = async () => {
+    try {
+      const res = await axiosInstance.post('/api/ai', {
+        prompt: promptIncome.trim(),
+      });
+
+      toast({
+        title: 'Умный помощник',
+        description: res.data,
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.error('Error fetching advice:', error);
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось получить совет',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const adviceExpChat = async () => {
+    try {
+      const res = await axiosInstance.post('/api/ai', {
+        prompt: promptExp.trim(),
+      });
+
+      toast({
+        title: 'Умный помощник',
+        description: res.data,
+        status: 'success',
+        isClosable: true,
+      });
+    } catch (error) {
+      console.error('Error fetching advice:', error);
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось получить совет',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
   return (
     <Flex
       marginTop="50px"
@@ -90,7 +148,7 @@ export default function ExpIncPage(): JSX.Element {
       justifyContent="center"
       gap={4}
     >
-      <ExpIncCard title="ДОХОДЫ">
+      <ExpIncCard title="ДОХОДЫ" chatHandler={adviceIncomeChat}>
         <Flex
           direction="column"
           alignItems="center"
@@ -118,7 +176,7 @@ export default function ExpIncPage(): JSX.Element {
           </Box>
         </Flex>
       </ExpIncCard>
-      <ExpIncCard title="РАСХОДЫ">
+      <ExpIncCard title="РАСХОДЫ" chatHandler={adviceExpChat}>
         <Flex
           direction="column"
           alignItems="center"

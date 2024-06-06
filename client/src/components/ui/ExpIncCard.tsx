@@ -1,7 +1,21 @@
-import React from 'react';
-import { Box, Button, Card, CardBody, Divider, Flex, Heading, Stack, Text } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import {
+  Box,
+  Button,
+  Card,
+  CardBody,
+  Divider,
+  Flex,
+  Heading,
+  Stack,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
+import { ChatIcon } from '@chakra-ui/icons';
 import { setPrevMonth, setNextMonth } from '../../redux/slices/transSlice';
+import axiosInstance from '../../services/axiosInstance';
+import { useAppSelector } from '../../hooks/reduxHooks';
 
 const months = [
   'Январь',
@@ -18,11 +32,11 @@ const months = [
   'Декабрь',
 ];
 
-export default function ExpIncCard({ title, children }): JSX.Element {
+export default function ExpIncCard({ title, children, chatHandler }): JSX.Element {
   const dispatch = useDispatch();
   const choosenMonth = useSelector((state) => state.trans.choosenMonth);
   const choosenYear = useSelector((state) => state.trans.choosenYear);
-
+  const expends = useAppSelector((state) => state.trans.expends);
   const prevMonth = () => {
     dispatch(setPrevMonth());
   };
@@ -30,6 +44,8 @@ export default function ExpIncCard({ title, children }): JSX.Element {
   const nextMonth = () => {
     dispatch(setNextMonth());
   };
+
+  
 
   return (
     <Card
@@ -42,6 +58,7 @@ export default function ExpIncCard({ title, children }): JSX.Element {
     >
       <CardBody boxShadow="dark-lg" borderRadius="md">
         <Stack spacing="5">
+          <ChatIcon onClick={chatHandler} />
           <Heading size="md">{title}</Heading>
           <Flex direction="column" align="center" justify="center" gap="30px">
             <div style={{ display: 'flex', alignItems: 'center' }}>

@@ -1,13 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { getExpSumThunk, getIncomeSumThunk } from '../../redux/slices/transThunkActions';
@@ -16,28 +8,14 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export const options = {
   responsive: true,
-
   plugins: {
-    legend: {
-      display: false,
-    },
-
-    title() {
-      return '';
-    },
-    tooltip: {
-      bodyFont: {
-        size: 26,
-      },
-    },
-  },
-  bodyFont: {
-    size: 26,
+    legend: { display: false },
+    title: { display: false },
+    tooltip: { bodyFont: { size: 26 } },
   },
 };
 
 const now = new Date();
-
 const halfYearAgo = new Date(
   now.getFullYear() - Math.floor((now.getMonth() + Number(now.getDate() > 15)) / 6) * 6,
   0,
@@ -46,18 +24,8 @@ const halfYearAgo = new Date(
 
 function getMonthName(month) {
   const monthNames = [
-    'Январь',
-    'Февраль',
-    'Март',
-    'Апрель',
-    'Май',
-    'Июнь',
-    'Июль',
-    'Август',
-    'Сентябрь',
-    'Октябрь',
-    'Ноябрь',
-    'Декабрь',
+    'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+    'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',
   ];
   return monthNames[month];
 }
@@ -68,15 +36,16 @@ for (let i = 0; i < 6; i++) {
   labels.push(getMonthName(monthIndex));
 }
 
-export default function BarChart({ sixMonthsData }): JSX.Element {
+const BarChart = React.memo(({ sixMonthsData }) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     void dispatch(getIncomeSumThunk());
     void dispatch(getExpSumThunk());
-  }, []);
+  }, [dispatch]);
+
   const sumIncome = useAppSelector((state) => state.trans.incomeSums);
   const sumExp = useAppSelector((state) => state.trans.expSums);
-  console.log(sumIncome, sumExp);
+
   const data = {
     labels,
     datasets: [
@@ -94,4 +63,6 @@ export default function BarChart({ sixMonthsData }): JSX.Element {
   };
 
   return <Bar options={options} data={data} />;
-}
+});
+
+export default BarChart;
