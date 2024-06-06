@@ -54,8 +54,9 @@ export default function ExpIncCard({ title, children, chatHandler }): JSX.Elemen
       justifyContent="center"
       alignContent="center"
       textAlign="center"
+      borderColor="transparent"
     >
-      <CardBody>
+      <CardBody boxShadow="dark-lg" borderRadius="md">
         <Stack spacing="5">
           <ChatIcon onClick={chatHandler} />
           <Heading size="md">{title}</Heading>
