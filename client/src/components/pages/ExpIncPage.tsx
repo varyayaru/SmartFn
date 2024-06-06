@@ -36,7 +36,7 @@ export default function ExpIncPage(): JSX.Element {
 
   const incomes = useAppSelector((state) => state.trans.incomes);
   const expends = useAppSelector((state) => state.trans.expends);
-// console.log(expends)
+  // console.log(expends)
   const categoryData = expends.reduce((acc, transaction) => {
     if (!transaction || !transaction.Category) {
       // Если транзакция или категория отсутствуют, пропускаем текущую транзакцию

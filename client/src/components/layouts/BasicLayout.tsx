@@ -29,16 +29,14 @@ export default function BasicLayout(): JSX.Element {
     // });
   }, []);
 
-  return (
-    <Container maxW="container.xl">
-      {user.status === 'fetching' ? (
-        <SpinnerPage />
-      ) : (
-        <>
-          {user.status !== 'guest' && <NavBar />}
-          <Outlet />
-        </>
-      )}
-    </Container>
+  return user.status === 'fetching' ? (
+    <SpinnerPage />
+  ) : (
+    <>
+      {user.status !== 'guest' && <NavBar />}
+      <Container maxW="container.xl">
+        <Outlet />
+      </Container>
+    </>
   );
 }
