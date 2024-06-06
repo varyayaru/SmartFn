@@ -74,7 +74,7 @@ export default function SignUpPage(): JSX.Element {
                   bg={useColorModeValue('gray.100', 'gray.900')}
                 />
                 <Text mt={1} color={useColorModeValue('gray.900', 'gray.100')}>
-                  Длина не менее 8 символов
+                  Введите пароль (честно не смотрю) 
                 </Text>
               </FormControl>
 
