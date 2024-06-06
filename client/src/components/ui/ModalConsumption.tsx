@@ -75,7 +75,7 @@ export default function ModalConsumption({ isOpen, onClose }): JSX.Element {
                 overflowY="scroll"
                 maxHeight="200px"
               >
-                <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+                <Grid templateColumns="repeat(2, 1fr)" gap={6} ml={3}>
                   {expendStor.map((item) => (
                     <Button
                       key={item.id}
