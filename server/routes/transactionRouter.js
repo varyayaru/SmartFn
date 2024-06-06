@@ -22,6 +22,7 @@ transactionRouter.post('/income', verifyAccessToken, async (req, res) => {
           [Op.between]: [startDate, endDate],
         },
       },
+      order: [['id', 'DESC']],
     });
 
     res.status(200).json(data);
@@ -51,6 +52,7 @@ transactionRouter.post('/expend', verifyAccessToken, async (req, res) => {
         },
       },
       include: [{ model: Category }],
+      order: [['id', 'DESC']],
     });
 
     res.status(200).json(data);
