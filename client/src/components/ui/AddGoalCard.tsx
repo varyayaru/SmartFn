@@ -22,7 +22,14 @@ export default function AddGoalCard(): JSX.Element {
     onClose();
   };
   return (
-    <Card minH="200px" variant="unstyled" mb={6} alignItems="center" justifyContent="center">
+    <Card
+      minH="200px"
+      variant="unstyled"
+      mb={6}
+      alignItems="center"
+      justifyContent="center"
+      backgroundColor="transparent"
+    >
       <Button
         onClick={onOpen}
         variant="unstyled"

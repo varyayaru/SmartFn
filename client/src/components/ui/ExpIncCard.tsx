@@ -38,8 +38,9 @@ export default function ExpIncCard({ title, children }): JSX.Element {
       justifyContent="center"
       alignContent="center"
       textAlign="center"
+      borderColor="transparent"
     >
-      <CardBody>
+      <CardBody boxShadow="dark-lg" borderRadius="md">
         <Stack spacing="5">
           <Heading size="md">{title}</Heading>
           <Flex direction="column" align="center" justify="center" gap="30px">

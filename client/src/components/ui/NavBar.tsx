@@ -34,13 +34,22 @@ export default function NavBar(): JSX.Element {
 
   return (
     <>
-      <Box px={4} marginTop="10px" marginBottom="30px" boxShadow="xs" bg="white">
-        <Flex h={16} alignItems="center" justifyContent="space-between" gap="10px">
+      <Box
+        px={4}
+        marginBottom="30px"
+        boxShadow="inset 0px -4px 10px rgba(0, 0, 0, 0.4)"
+        bg="white"
+        // borderRadius="0px 0px 10px 10px"
+        backgroundColor="#733dd9"
+        textColor="white"
+        fontWeight="500"
+      >
+        <Flex h={16} alignItems="center" justifyContent="space-around" gap="10px">
           <Box>
             <Link href="/">
               <Image
                 width="130px"
-                src="https://static.vecteezy.com/system/resources/previews/011/794/041/non_2x/one-hundred-dollar-bill-free-png.png"
+                src="blob:https://web.telegram.org/7ce7c12f-a9b5-473c-be3e-84abb7caa76b"
                 alt="Logo"
               />
             </Link>
@@ -81,7 +90,16 @@ export default function NavBar(): JSX.Element {
               <NavLink to="/goals">Цели</NavLink>
             </HStack>
           )}
-          <NavLink onClick={logoutHandler}>Выйти</NavLink>
+          <NavLink onClick={logoutHandler}>
+            <Button
+              backgroundColor="#de175e"
+              color="white"
+              _hover={{ backgroundColor: '#b3154b' }}
+              _focus={{ backgroundColor: '#b3154b' }}
+            >
+              Выйти
+            </Button>
+          </NavLink>
         </Flex>
       </Box>
       <ModalIncome isOpen={incomeDisclosure.isOpen} onClose={incomeDisclosure.onClose} />
