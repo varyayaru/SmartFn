@@ -19,7 +19,7 @@ export default function ModalGoalEditAdd({ isOpen, onClose, title, addHandler })
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{title}</ModalHeader>
+        <ModalHeader mt={4}>{title}</ModalHeader>
         <ModalCloseButton />
         <form onSubmit={addHandler}>
           <ModalBody>

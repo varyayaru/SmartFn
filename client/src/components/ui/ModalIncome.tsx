@@ -26,10 +26,10 @@ export default function ModalIncome({ isOpen, onClose }): JSX.Element {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} >
       <ModalOverlay />
-      <ModalContent mx="4" w={{ base: '90%', md: '500px' }}>
-        <ModalHeader>Ваш доход</ModalHeader>
+      <ModalContent mx="4" w={{ base: '90%', md: '500px' }} >
+        <ModalHeader mt={4}>Ваш доход</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <form onSubmit={submitHandler}>
@@ -46,6 +46,7 @@ export default function ModalIncome({ isOpen, onClose }): JSX.Element {
                 aria-label="Submit"
                 borderRadius="full"
                 size="lg"
+                marginBottom='30px'
               />
             </Box>
           </form>

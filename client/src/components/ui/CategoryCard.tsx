@@ -22,7 +22,13 @@ export default function CategoryCard({ emoji, name, catId }: CategoryCardProps):
 
   return (
     <>
-      <Card alignItems="center" marginTop="50px" boxShadow="dark-lg" borderRadius="md">
+      <Card
+        alignItems="center"
+        marginTop="50px"
+        borderRadius="md"
+        borderWidth="2px"
+        borderColor="grey"
+      >
         <CardHeader>
           <Text fontSize="8xl">{emoji}</Text>
         </CardHeader>

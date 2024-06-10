@@ -48,10 +48,10 @@ export default function ModalConsumption({ isOpen, onClose }): JSX.Element {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent mx="4" w={{ base: '90%', md: '500px' }}>
-        <ModalHeader>Ваш расход</ModalHeader>
+    <Modal isOpen={isOpen} onClose={onClose} >
+      <ModalOverlay  />
+      <ModalContent mx="4" w={{ base: '90%', md: '500px' }} >
+        <ModalHeader mt={4}>Ваш расход</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <form onSubmit={submitHandler}>
@@ -74,16 +74,17 @@ export default function ModalConsumption({ isOpen, onClose }): JSX.Element {
                 mb={3}
                 overflowY="scroll"
                 maxHeight="200px"
+                backgroundColor='white'
               >
-                <Grid templateColumns="repeat(2, 1fr)" gap={6} ml={3}>
+                <Grid templateColumns="repeat(2, 1fr)" gap={6}   >
                   {expendStor.map((item) => (
                     <Button
                       key={item.id}
                       leftIcon={item.emoji}
                       variant="outline"
-                      colorScheme="teal"
+                      borderRadius="md" borderWidth='1px' borderColor="grey"
                       onClick={() => handleCategoryClick(item.id)} // Обработчик клика на категорию
-                      width="150px"
+                      width="110%"
                     >
                       {item.name}
                     </Button>
@@ -100,6 +101,7 @@ export default function ModalConsumption({ isOpen, onClose }): JSX.Element {
                 aria-label="Submit"
                 borderRadius="full"
                 size="lg"
+                marginBottom='30px'
               />
             </Box>
           </form>

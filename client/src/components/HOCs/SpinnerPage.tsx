@@ -5,20 +5,20 @@ import { motion } from 'framer-motion'; // Импортируем motion из Fr
 function Logo() {
   const animationVariants = {
     hidden: { y: -100 }, // Начальное состояние: смещение вверху
-    visible: { 
+    visible: {
       y: 0, // Конечное состояние: исходное положение
-      transition: { 
-        type: "spring", // Использование физической анимации
+      transition: {
+        type: 'spring', // Использование физической анимации
         stiffness: 120, // Регулирует жесткость анимации
         damping: 12, // Регулирует затухание анимации
         duration: 2, // Продолжительность анимации
-      }
+      },
     },
   };
 
   return (
     <motion.div variants={animationVariants} initial="hidden" animate="visible">
-      <Image src="/public/Untitled_logo_2_free-file.jpg" alt="Logo" boxSize="100px" />
+      <Image src="/public/logo.png" alt="Logo"  />
     </motion.div>
   );
 }

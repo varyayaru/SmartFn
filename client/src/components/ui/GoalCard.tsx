@@ -44,12 +44,12 @@ export default function GoalCard({ goal }): JSX.Element {
   console.log(sumTrans);
 
   return (
-    <Card maxW="sm" mb={6} boxShadow="dark-lg" borderRadius="md">
+    <Card maxW="sm" mb={6} borderRadius="md" borderWidth='2px' borderColor="grey">
       <CardBody display="flex" flexDirection="column" alignItems="center" gap={4}>
         <Heading size="md">{goal.name}</Heading>
         <Progress
           mt={10}
-          colorScheme="purple"
+          colorScheme="green"
           hasStripe
           transitionDuration="0.2s"
           size="lg"

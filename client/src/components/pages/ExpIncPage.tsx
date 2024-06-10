@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../css/expinc.css';
-import { Flex, Box, UnorderedList, useToast } from '@chakra-ui/react';
+import { Flex, Box, UnorderedList, useToast, Button, Text } from '@chakra-ui/react';
 import { FixedSizeList as List } from 'react-window';
 import ExpIncCard from '../ui/ExpIncCard';
 import ListCard from '../ui/ListCard';
@@ -83,12 +83,11 @@ export default function ExpIncPage(): JSX.Element {
 
   const toast = useToast();
 
-  const promptIncome =
-    'На основе этих данных, пожалуйста дай мне совет по току как больше зарабатывать в стиле "вот бы был у нас метод инвестировать в биткоин и поднимать деньги 3 предложения максимум по 10 слов';
+  const promptIncome = `${JSON.stringify(incomes)} На основе этих данных, пожалуйста дай мне совет как больше зарабатывать и на чем можно поднять денег, не более 20 слов`;
 
   const promptExp = `
   ${JSON.stringify(expends)}
-  На основе этих данных, пожалуйста дай мне совет в стиле "вот бы был у нас метод чтобы...(пример Вот бы был у нас метод чтобы оптимизировать бюджет на развлечения. Можно рассмотреть альтернативные варианты досуга для уменьшения расходов.) 
+  На основе этих данных, пожалуйста дай мне совет в стиле друзей которые любят шутить друг над другом, как оптимизировать расходы. Обрати внимание на категории с максимальными тратами
   3 предложения максимум по 10 слов
   `;
 
@@ -99,11 +98,31 @@ export default function ExpIncPage(): JSX.Element {
       });
 
       toast({
-        title: 'Умный помощник',
-        description: res.data,
-        status: 'success',
-        duration: 9000,
-        isClosable: true,
+        position: 'bottom-left',
+        duration: null,
+
+        render: () => (
+          <Box
+            display="flex"
+            flexDirection="column"
+            color="black"
+            p={3}
+            bg="white"
+            borderRadius="md"
+            borderWidth="2px"
+            borderColor="grey"
+          >
+            <Button
+              alignSelf="flex-end"
+              fontSize="15px"
+              width="5px"
+              onClick={() => toast.closeAll()}
+            >
+              x
+            </Button>
+            <Text fontSize="4xl">{res.data}</Text>
+          </Box>
+        ),
       });
     } catch (error) {
       console.error('Error fetching advice:', error);
@@ -124,10 +143,32 @@ export default function ExpIncPage(): JSX.Element {
       });
 
       toast({
-        title: 'Умный помощник',
-        description: res.data,
-        status: 'success',
-        isClosable: true,
+        position: 'bottom-left',
+        duration: null,
+
+        render: () => (
+          <Box
+            display="flex"
+            flexDirection="column"
+            color="black"
+            p={3}
+            bg="white"
+            borderRadius="md"
+            borderWidth="2px"
+            borderColor="green"
+          >
+            <Button
+              alignSelf="flex-end"
+              fontSize="10px"
+              width="5px"
+              onClick={() => toast.closeAll()}
+            >
+              x
+            </Button>
+
+            <Text fontSize="4xl">{res.data}</Text>
+          </Box>
+        ),
       });
     } catch (error) {
       console.error('Error fetching advice:', error);
@@ -135,11 +176,12 @@ export default function ExpIncPage(): JSX.Element {
         title: 'Ошибка',
         description: 'Не удалось получить совет',
         status: 'error',
-        duration: 9000,
+
         isClosable: true,
       });
     }
   };
+
   return (
     <Flex
       marginTop="50px"
