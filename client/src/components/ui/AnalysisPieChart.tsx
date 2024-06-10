@@ -2,11 +2,11 @@ import { Box } from '@chakra-ui/react';
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-export default function AnalysisPieChart({ data, wid, hei }): JSX.Element {
+export default React.memo(function AnalysisPieChart({ data, wid, hei }) {
   const options = {
     plugins: {
       legend: {
-        display: false, // Скрыть легенду
+        display: false,
       },
       tooltip: {
         callbacks: {
@@ -33,4 +33,4 @@ export default function AnalysisPieChart({ data, wid, hei }): JSX.Element {
       <Doughnut data={data} options={options} />
     </Box>
   );
-}
+});

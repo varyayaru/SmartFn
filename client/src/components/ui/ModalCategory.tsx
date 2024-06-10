@@ -49,7 +49,7 @@ export default function ModalCategory({
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent maxWidth="400px">
-        <ModalHeader>{title}</ModalHeader>
+        <ModalHeader mt={4}>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
           <form onSubmit={onSubmit}>
@@ -73,14 +73,14 @@ export default function ModalCategory({
             </Box>
             <Box width="100%" display="flex" justifyContent="center">
               <IconButton
-                marginBottom="40px"
+                marginBottom="10px"
                 type="submit"
                 icon={<CheckIcon />}
                 colorScheme="green"
                 aria-label="Submit"
                 borderRadius="full"
                 size="lg"
-                mt={4}
+                mt={10}
               />
             </Box>
           </form>

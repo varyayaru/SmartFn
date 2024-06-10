@@ -13,10 +13,20 @@ export default function ErrorPage(): React.ReactElement {
       justifyContent="center" // Центрируем по вертикали
       alignItems="center" // Центрируем по горизонтали
     >
-      <Heading as="h1" size="2xl" color="red.500" mb={4}>404</Heading>
-      <Heading as="h1" size="xl" color="green.600">Super protection, called: 'ololo-Anton3000'</Heading>
+      <Heading as="h1" size="2xl" color="red.500" mb={4}>
+        404
+      </Heading>
+      <Heading as="h1" size="xl" color="green.600">
+        Super protection, called: 'ololo-Anton3000'
+      </Heading>
       {/* Добавляем изображение */}
-      <Image src={'/public/2024-06-05 15.23.07.jpg'} alt="Error Page Image" boxSize="400px" objectFit="cover" mt={6} />
+      <Image
+        src="/public/2024-06-05 15.23.07.jpg"
+        alt="Error Page Image"
+        boxSize="400px"
+        objectFit="cover"
+        mt={6}
+      />
     </Center>
   );
 }

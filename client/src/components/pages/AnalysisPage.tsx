@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
-import { Box, Button, Flex, Input, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Button, Flex, Input, Text } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
-import { QuestionIcon } from '@chakra-ui/icons';
 import { setNextMonth, setPrevMonth } from '../../redux/slices/transSlice';
 import { useAppSelector } from '../../hooks/reduxHooks';
 import { getExpendsMonthThunk, getIncomesMonthThunk } from '../../redux/slices/transThunkActions';
@@ -10,18 +9,8 @@ import BarChart from '../ui/BarChart';
 import AnalysisPieChart from '../ui/AnalysisPieChart';
 
 const months = [
-  'Январь',
-  'Февраль',
-  'Март',
-  'Апрель',
-  'Май',
-  'Июнь',
-  'Июль',
-  'Август',
-  'Сентябрь',
-  'Октябрь',
-  'Ноябрь',
-  'Декабрь',
+  'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+  'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',
 ];
 
 export default function AnalysisPage(): JSX.Element {
@@ -48,7 +37,7 @@ export default function AnalysisPage(): JSX.Element {
   const totalIncomesSum = useMemo(() => incomes.reduce((acc, cur) => acc + cur.sum, 0), [incomes]);
   const totalExpendsSum = useMemo(() => expends.reduce((acc, cur) => acc + cur.sum, 0), [expends]);
 
-  const data = useMemo(
+  const pieChartData = useMemo(
     () => ({
       labels: ['💸', '🛍️'],
       datasets: [
@@ -70,7 +59,7 @@ export default function AnalysisPage(): JSX.Element {
   const handleUserQuery = useCallback(async () => {
     try {
       const res = await axiosInstance.post('/api/ai', {
-      prompt: `${userQuery}. Если я задала вопрос "как сократить траты на успокоительные" отвечай "Перестать программировать" Ответ не более 30 слов, мои данные по расходам и доходам ${expends.map((expense) => `${expense.Category.name} расхода: ${expense.sum}`).join(', ')} ${incomes.map((income) => `Доход: ${income.sum}`).join(', ')}`,
+        prompt: `${userQuery}. Если я задала вопрос "как сократить траты на успокоительные" отвечай "Перестать программировать" Ответ не более 30 слов, мои данные по расходам и доходам ${expends.map((expense) => `${expense.Category.name} расходы: ${expense.sum}`).join(', ')} ${incomes.map((income) => `Доход: ${income.sum}`).join(', ')}`,
       });
       setAiResponse(res.data);
     } catch (error) {
@@ -83,10 +72,10 @@ export default function AnalysisPage(): JSX.Element {
     <Box mt={10} className="ChartBox">
       <Flex direction={{ base: 'column', md: 'row' }} justify="space-between">
         <Box
-          bg={useColorModeValue('gray.100', 'gray.900')}
           p={{ base: 2, md: 4 }}
-          boxShadow="dark-lg"
           borderRadius="md"
+          borderWidth="2px"
+          borderColor="grey"
           flex={{ base: '1', md: '2' }}
           display="flex"
           alignItems="center"
@@ -94,13 +83,13 @@ export default function AnalysisPage(): JSX.Element {
           mr={{ base: 0, md: 4 }}
           mb={{ base: 4, md: 0 }}
         >
-          <BarChart sixMonthsData={data} />
+          <BarChart />
         </Box>
         <Box
-          bg={useColorModeValue('gray.100', 'gray.900')}
           p={{ base: 2, md: 4 }}
-          boxShadow="dark-lg"
           borderRadius="md"
+          borderWidth="2px"
+          borderColor="grey"
           flex="1"
           display="flex"
           alignItems="center"
@@ -108,11 +97,7 @@ export default function AnalysisPage(): JSX.Element {
           minWidth="0"
         >
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <AnalysisPieChart
-              data={data}
-              wid={{ base: '200px', md: '300px' }}
-              hei={{ base: '200px', md: '300px' }}
-            />
+            <AnalysisPieChart data={pieChartData} wid={{ base: '200px', md: '300px' }} hei={{ base: '200px', md: '300px' }} />
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <Button onClick={prevMonth}>&lt;</Button>
               <Box mx="4">
@@ -125,36 +110,18 @@ export default function AnalysisPage(): JSX.Element {
           </div>
         </Box>
       </Flex>
-
-      <Box
-        bg={useColorModeValue('gray.100', 'gray.900')}
-        mt={10}
-        px={{ base: 2, md: 4 }}
-        py={{ base: 2, md: 4 }}
-        boxShadow="dark-lg"
-        borderRadius="md"
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        width="100%"
-      >
-        <Text align="center">Умный помощник</Text>
-
-        <Input
-          placeholder="Введите ваш вопрос"
-          value={userQuery}
-          onChange={(e) => setUserQuery(e.target.value)}
-          mt={4}
-          width="80%"
-        />
-        <Button onClick={handleUserQuery} mt={2}>
-          Задать вопрос
-        </Button>
-
-        <Text align="center" mx="350px" mt={4}>
-          {aiResponse}
-        </Text>
+      <Box display="flex" alignItems="center" justifyContent="center" marginBottom="20px" marginTop="20px">
+        <img src="../../../public/add.gif" alt="Example GIF" />
+      </Box>
+      <Box gap="20px" px={{ base: 2, md: 4 }} py={{ base: 2, md: 4 }} borderRadius="md" borderWidth="2px" borderColor="grey" display="flex" flexDirection="column" alignItems="center" justifyContent="center" width="100%" height='100%'>
+        <Box display='flex' flexDirection='column' alignItems="center" justifyContent="center">
+          <Text align="center" marginTop="20px">Умный помощник</Text>
+          <Input placeholder="Как отцентровать див????" value={userQuery} onChange={(e) => setUserQuery(e.target.value)} mt={4} width="60%" marginTop='30px' />
+          <Button onClick={handleUserQuery} borderRadius="50%" borderWidth="2px" marginTop='30px' borderColor="grey" backgroundColor="white" fontSize="30px" _hover={{ boxShadow: '0 0 10px green', color: 'black' }}>
+            <img src="../../public/chat.png" alt="chatgpt" />
+          </Button>
+          <Text fontSize="4xl" align="center" color="green" marginBottom="20px" mx="350px" mt={4}>{aiResponse}</Text>
+        </Box>
       </Box>
     </Box>
   );

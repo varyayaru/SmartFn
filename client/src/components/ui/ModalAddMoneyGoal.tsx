@@ -33,7 +33,7 @@ export default function ModalAddMoneyGoal({ addIsOpen, addOnClose }): JSX.Elemen
     <Modal isOpen={!!selectedGoal} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Пополнить цель</ModalHeader>
+        <ModalHeader mt={4}>Пополнить цель</ModalHeader>
         <ModalCloseButton />
         <form onSubmit={addMoney}>
           <ModalBody>

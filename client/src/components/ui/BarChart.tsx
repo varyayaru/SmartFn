@@ -36,7 +36,7 @@ for (let i = 0; i < 6; i++) {
   labels.push(getMonthName(monthIndex));
 }
 
-const BarChart = React.memo(({ sixMonthsData }) => {
+const BarChart = React.memo(() => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     void dispatch(getIncomeSumThunk());
@@ -50,12 +50,12 @@ const BarChart = React.memo(({ sixMonthsData }) => {
     labels,
     datasets: [
       {
-        label: '',
+        label: 'Доходы',
         data: sumIncome,
         backgroundColor: 'rgba(94, 230, 83, 0.55)',
       },
       {
-        label: '',
+        label: 'Расходы',
         data: sumExp,
         backgroundColor: 'rgba(233, 66, 66, 0.55)',
       },

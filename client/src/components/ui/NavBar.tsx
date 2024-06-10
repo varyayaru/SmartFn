@@ -13,8 +13,11 @@ import {
   MenuList,
   MenuItem,
   useBreakpointValue,
+  IconButton,
+  Text,
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
+import { MdLogout } from 'react-icons/md';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { logoutThunk } from '../../redux/slices/authThunkActions';
 import ModalIncome from './ModalIncome';
@@ -37,21 +40,17 @@ export default function NavBar(): JSX.Element {
       <Box
         px={4}
         marginBottom="30px"
-        boxShadow="inset 0px -4px 10px rgba(0, 0, 0, 0.4)"
         bg="white"
-        // borderRadius="0px 0px 10px 10px"
-        backgroundColor="#733dd9"
+        height="100%"
         textColor="white"
-        fontWeight="500"
+        fontSize="18px"
+        color="black"
+        marginTop='10px'
       >
-        <Flex h={16} alignItems="center" justifyContent="space-around" gap="10px">
+        <Flex h={16} height="90px" alignItems="center" justifyContent="space-around" gap="10px">
           <Box>
             <Link href="/">
-              <Image
-                width="130px"
-                src="blob:https://web.telegram.org/7ce7c12f-a9b5-473c-be3e-84abb7caa76b"
-                alt="Logo"
-              />
+              <Image height="50px" src="../../../public/logo.png" alt="Logo" />
             </Link>
           </Box>
           {isMobile ? (
@@ -66,6 +65,33 @@ export default function NavBar(): JSX.Element {
                 Меню
               </MenuButton>
               <MenuList minWidth="auto" right="35%" position="relative" textAlign="center">
+                <Button
+                  onClick={incomeDisclosure.onOpen}
+                  borderRadius="50%"
+                  borderWidth="2px"
+                  borderColor="grey"
+                  backgroundColor="white"
+                  fontSize="30px"
+                  width="40px"
+                  height="40px"
+                  _hover={{ boxShadow: '0 0 10px green', color: 'black' }}
+                >
+                  +
+                </Button>
+
+                <Button
+                  onClick={consumptionDisclosure.onOpen}
+                  borderRadius="50%"
+                  borderWidth="2px"
+                  borderColor="grey"
+                  backgroundColor="white"
+                  fontSize="30px"
+                  width="40px"
+                  height="40px"
+                  _hover={{ boxShadow: '0 0 10px red', color: 'black' }}
+                >
+                  -
+                </Button>
                 <MenuItem as={NavLink} to="/" justifyContent="center">
                   Аналитика
                 </MenuItem>
@@ -82,24 +108,83 @@ export default function NavBar(): JSX.Element {
             </Menu>
           ) : (
             <HStack as="nav" spacing="20px" flexWrap="wrap">
-              <Button onClick={incomeDisclosure.onOpen}>+</Button>
-              <Button onClick={consumptionDisclosure.onOpen}>-</Button>
-              <NavLink to="/">Аналитика</NavLink>
-              <NavLink to="/expinc">Доходы и расходы</NavLink>
-              <NavLink to="/categories">Категории</NavLink>
-              <NavLink to="/goals">Цели</NavLink>
+              <Box display='flex' gap='16px' marginRight='10px'> 
+              <Button
+                onClick={incomeDisclosure.onOpen}
+                borderRadius="50%"
+                borderWidth="2px"
+                borderColor="grey"
+                backgroundColor="white"
+                fontSize="30px"
+                width="40px"
+                height="40px"
+                _hover={{ boxShadow: '0 0 10px green', color: 'black' }}
+              >
+               <Text> 
+                +</Text>
+              </Button>
+
+              <Button
+                onClick={consumptionDisclosure.onOpen}
+                borderRadius="50%"
+                borderWidth="2px"
+                borderColor="grey"
+                backgroundColor="white"
+                fontSize="30px"
+                width="40px"
+                height="40px"
+                _hover={{ boxShadow: '0 0 10px red', color: 'black' }}
+              >
+                <Text marginBottom='5px'> 
+                -</Text>
+              </Button></Box>
+              <Box
+                as={NavLink}
+                to="/"
+                _hover={{ textShadow: '0 0 10px green' }}
+                textDecoration="none"
+                px={2}
+                py={1}
+              >
+                Аналитика
+              </Box>
+              <Box
+                as={NavLink}
+                to="/expinc"
+                _hover={{ textShadow: '0 0 10px green' }}
+                textDecoration="none"
+                px={2}
+                py={1}
+              >
+                Доходы и расходы
+              </Box>
+              <Box
+                as={NavLink}
+                to="/categories"
+                _hover={{ textShadow: '0 0 10px green' }}
+                textDecoration="none"
+                px={2}
+                py={1}
+              >
+                Категории
+              </Box>
+              <Box
+                as={NavLink}
+                to="/goals"
+                _hover={{ textShadow: '0 0 10px green' }}
+                textDecoration="none"
+                px={2}
+                py={1}
+              >
+                Цели
+              </Box>
             </HStack>
           )}
-          <NavLink onClick={logoutHandler}>
-            <Button
-              backgroundColor="#de175e"
-              color="white"
-              _hover={{ backgroundColor: '#b3154b' }}
-              _focus={{ backgroundColor: '#b3154b' }}
-            >
-              Выйти
-            </Button>
-          </NavLink>
+          <IconButton
+            icon={<MdLogout size="25px" onClick={logoutHandler} />}
+            backgroundColor="white"
+            size="lg"
+          />
         </Flex>
       </Box>
       <ModalIncome isOpen={incomeDisclosure.isOpen} onClose={incomeDisclosure.onClose} />

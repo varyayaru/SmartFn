@@ -7,6 +7,7 @@ import {
   Divider,
   Flex,
   Heading,
+  IconButton,
   Stack,
   Text,
   useToast,
@@ -45,8 +46,6 @@ export default function ExpIncCard({ title, children, chatHandler }): JSX.Elemen
     dispatch(setNextMonth());
   };
 
-  
-
   return (
     <Card
       width="700px"
@@ -56,9 +55,8 @@ export default function ExpIncCard({ title, children, chatHandler }): JSX.Elemen
       textAlign="center"
       borderColor="transparent"
     >
-      <CardBody boxShadow="dark-lg" borderRadius="md">
+      <CardBody borderRadius="md" borderWidth="2px" borderColor="grey">
         <Stack spacing="5">
-          <ChatIcon onClick={chatHandler} />
           <Heading size="md">{title}</Heading>
           <Flex direction="column" align="center" justify="center" gap="30px">
             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -71,6 +69,12 @@ export default function ExpIncCard({ title, children, chatHandler }): JSX.Elemen
               <Button onClick={nextMonth}>&gt;</Button>
             </div>
             {children}
+            <IconButton
+              onClick={chatHandler}
+              icon={<img src="../../public/chat.png" alt="chatgpt" />}
+              backgroundColor="white"
+              width="20px"
+            />
           </Flex>
         </Stack>
       </CardBody>
